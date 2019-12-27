@@ -26,7 +26,6 @@ dependencies:
   google_fonts: ^0.2.0
   webview_flutter: ^0.3.18+1
   flutter_webview_plugin: ^0.3.10
-  flutter_web_ui: any
 
 dev_dependencies:
   flutter_test:

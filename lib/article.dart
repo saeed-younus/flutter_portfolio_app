@@ -28,41 +28,35 @@ class _ArticleScreenState extends State<ArticleScreen> {
                     SizedBox(
                       width: 500,
                     ),
-                    InkWell(
-                      onTap: () {
+                    getCardItem(
+                      "images/android_logo.png",
+                      "ViewModel with ViewModelProvider.Factory : The Creator of ViewModel",
+                      "Why and when we use ViewModelProvider.Factory for ViewModel.",
+                      () {
                         js.context.callMethod("open", [
                           "https://medium.com/koderlabs/viewmodel-with-viewmodelprovider-factory-the-creator-of-viewmodel-8fabfec1aa4f"
                         ]);
                       },
-                      child: getCardItem(
-                        "images/android_logo.png",
-                        "ViewModel with ViewModelProvider.Factory : The Creator of ViewModel",
-                        "Why and when we use ViewModelProvider.Factory for ViewModel.",
-                      ),
                     ),
-                    InkWell(
-                      onTap: () {
+                    getCardItem(
+                      "images/android_logo.png",
+                      "Motion Layout: Card Shuffle Animation",
+                      "Hi friends! In this article we will explore motion layout to get it’s excellence and create card shuffle animation as shown in video.",
+                      () {
                         js.context.callMethod("open", [
                           "https://medium.com/@sendtosaeed2/motion-layout-card-shuffle-animation-810e7978e8d0"
                         ]);
                       },
-                      child: getCardItem(
-                        "images/android_logo.png",
-                        "Motion Layout: Card Shuffle Animation",
-                        "Hi friends! In this article we will explore motion layout to get it’s excellence and create card shuffle animation as shown in video.",
-                      ),
                     ),
-                    InkWell(
-                      onTap: () {
+                    getCardItem(
+                      "images/flutter_icon.png",
+                      "Flutter: Material + Cupertino make together ❤",
+                      "Run material widgets on Cupertino app or run cupertino widgets on Material App.",
+                      () {
                         js.context.callMethod("open", [
                           "https://medium.com/@sendtosaeed2/flutter-material-cupertino-make-together-a3d2d7849548"
                         ]);
                       },
-                      child: getCardItem(
-                        "images/flutter_icon.png",
-                        "Flutter: Material + Cupertino make together ❤",
-                        "Run material widgets on Cupertino app or run cupertino widgets on Material App.",
-                      ),
                     ),
                   ],
                 ),
@@ -114,46 +108,51 @@ class _ArticleScreenState extends State<ArticleScreen> {
     );
   }
 
-  Widget getCardItem(String image, String title, String description) {
+  Widget getCardItem(
+      String image, String title, String description, VoidCallback onTap) {
     return Container(
       margin: EdgeInsets.all(16),
       width: 400,
       height: 350,
       child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              SizedBox(
-                width: 50,
-                height: 50,
-                child: Image.asset(
-                  image,
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: Image.asset(
+                    image,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              Text(
-                title,
-                style: GoogleFonts.comfortaa(
-                  textStyle: TextStyle(color: Colors.white),
-                  fontSize: Theme.of(context).textTheme.display1.fontSize,
-                  fontWeight: Theme.of(context).textTheme.display1.fontWeight,
+                SizedBox(
+                  height: 24,
                 ),
-              ),
-              SizedBox(
-                height: 32,
-              ),
-              Text(
-                description,
-                style: GoogleFonts.comfortaa(
-                  fontSize: Theme.of(context).textTheme.headline.fontSize,
-                  fontWeight: Theme.of(context).textTheme.headline.fontWeight,
+                Text(
+                  title,
+                  style: GoogleFonts.comfortaa(
+                    textStyle: TextStyle(color: Colors.white),
+                    fontSize: Theme.of(context).textTheme.display1.fontSize,
+                    fontWeight: Theme.of(context).textTheme.display1.fontWeight,
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 32,
+                ),
+                Text(
+                  description,
+                  style: GoogleFonts.comfortaa(
+                    textStyle: TextStyle(color: Colors.white60),
+                    fontSize: Theme.of(context).textTheme.headline.fontSize,
+                    fontWeight: Theme.of(context).textTheme.headline.fontWeight,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

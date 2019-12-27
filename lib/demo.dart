@@ -28,7 +28,7 @@ class _DemoScreenState extends State<DemoScreen> {
                 children: <Widget>[
                   RichText(
                     text: TextSpan(
-                      text: "Demo\n",
+                      text: "Live Demo\n",
                       children: [
                         TextSpan(
                           text: "Which is created in ",
