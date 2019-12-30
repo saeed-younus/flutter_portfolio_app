@@ -20,8 +20,8 @@ class _SkillScreenState extends State<SkillScreen> {
             child: Text(
               "Skills",
               style: GoogleFonts.comfortaa(
-                fontSize: Theme.of(context).textTheme.display2.fontSize,
-                fontWeight: Theme.of(context).textTheme.display2.fontWeight,
+                fontSize: Theme.of(context).textTheme.display3.fontSize,
+                fontWeight: Theme.of(context).textTheme.display3.fontWeight,
               ),
             ),
           ),
@@ -63,16 +63,20 @@ class _SkillScreenState extends State<SkillScreen> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Container(
               width: 200,
               height: 100,
               child: Image.asset(imageAssetName),
             ),
+            SizedBox(
+              height: 8,
+            ),
             Text(
               text,
               style: GoogleFonts.comfortaa(
-                fontSize: Theme.of(context).textTheme.headline.fontSize,
+                fontSize: 18,
                 fontWeight: FontWeight.w900,
               ),
             ),

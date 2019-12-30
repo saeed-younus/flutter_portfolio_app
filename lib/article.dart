@@ -22,43 +22,49 @@ class _ArticleScreenState extends State<ArticleScreen> {
           Row(
             children: <Widget>[
               Expanded(
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    SizedBox(
-                      width: 500,
-                    ),
-                    getCardItem(
-                      "images/android_logo.png",
-                      "ViewModel with ViewModelProvider.Factory : The Creator of ViewModel",
-                      "Why and when we use ViewModelProvider.Factory for ViewModel.",
-                      () {
-                        js.context.callMethod("open", [
-                          "https://medium.com/koderlabs/viewmodel-with-viewmodelprovider-factory-the-creator-of-viewmodel-8fabfec1aa4f"
-                        ]);
-                      },
-                    ),
-                    getCardItem(
-                      "images/android_logo.png",
-                      "Motion Layout: Card Shuffle Animation",
-                      "Hi friends! In this article we will explore motion layout to get it’s excellence and create card shuffle animation as shown in video.",
-                      () {
-                        js.context.callMethod("open", [
-                          "https://medium.com/@sendtosaeed2/motion-layout-card-shuffle-animation-810e7978e8d0"
-                        ]);
-                      },
-                    ),
-                    getCardItem(
-                      "images/flutter_icon.png",
-                      "Flutter: Material + Cupertino make together ❤",
-                      "Run material widgets on Cupertino app or run cupertino widgets on Material App.",
-                      () {
-                        js.context.callMethod("open", [
-                          "https://medium.com/@sendtosaeed2/flutter-material-cupertino-make-together-a3d2d7849548"
-                        ]);
-                      },
-                    ),
-                  ],
+                child: Padding(
+                  padding: EdgeInsets.all(32),
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      SizedBox(
+                        width: 500,
+                      ),
+                      getCardItem(
+                        "images/android_logo.png",
+                        "ViewModel with ViewModelProvider.Factory : The Creator of ViewModel",
+                        "Why and when we use ViewModelProvider.Factory for ViewModel.",
+                        Colors.greenAccent,
+                        () {
+                          js.context.callMethod("open", [
+                            "https://medium.com/koderlabs/viewmodel-with-viewmodelprovider-factory-the-creator-of-viewmodel-8fabfec1aa4f"
+                          ]);
+                        },
+                      ),
+                      getCardItem(
+                        "images/android_logo.png",
+                        "Motion Layout: Card Shuffle Animation",
+                        "Hi friends! In this article we will explore motion layout to get it’s excellence and create card shuffle animation as shown in video.",
+                        Colors.greenAccent,
+                        () {
+                          js.context.callMethod("open", [
+                            "https://medium.com/@sendtosaeed2/motion-layout-card-shuffle-animation-810e7978e8d0"
+                          ]);
+                        },
+                      ),
+                      getCardItem(
+                        "images/flutter_icon.png",
+                        "Flutter: Material + Cupertino make together ❤",
+                        "Run material widgets on Cupertino app or run cupertino widgets on Material App.",
+                        Colors.lightBlueAccent,
+                        () {
+                          js.context.callMethod("open", [
+                            "https://medium.com/@sendtosaeed2/flutter-material-cupertino-make-together-a3d2d7849548"
+                          ]);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -92,7 +98,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
               children: <Widget>[
                 RichText(
                   text: TextSpan(
-                    text: "Articles\nI Wrote",
+                    text: "Published \nArticles",
                     style: GoogleFonts.comfortaa(
                       textStyle: TextStyle(color: Colors.white),
                       fontSize: Theme.of(context).textTheme.display3.fontSize,
@@ -108,12 +114,12 @@ class _ArticleScreenState extends State<ArticleScreen> {
     );
   }
 
-  Widget getCardItem(
-      String image, String title, String description, VoidCallback onTap) {
+  Widget getCardItem(String image, String title, String description,
+      Color titleColor, VoidCallback onTap) {
     return Container(
       margin: EdgeInsets.all(16),
       width: 400,
-      height: 350,
+      height: 300,
       child: Card(
         child: InkWell(
           onTap: onTap,
@@ -135,9 +141,9 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 Text(
                   title,
                   style: GoogleFonts.comfortaa(
-                    textStyle: TextStyle(color: Colors.white),
-                    fontSize: Theme.of(context).textTheme.display1.fontSize,
-                    fontWeight: Theme.of(context).textTheme.display1.fontWeight,
+                    textStyle: TextStyle(color: titleColor),
+                    fontSize: Theme.of(context).textTheme.headline.fontSize,
+                    fontWeight: Theme.of(context).textTheme.headline.fontWeight,
                   ),
                 ),
                 SizedBox(
@@ -146,7 +152,6 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 Text(
                   description,
                   style: GoogleFonts.comfortaa(
-                    textStyle: TextStyle(color: Colors.white60),
                     fontSize: Theme.of(context).textTheme.headline.fontSize,
                     fontWeight: Theme.of(context).textTheme.headline.fontWeight,
                   ),

@@ -1,6 +1,14 @@
 # web_portfolio
 
-A new Flutter project.
+A Flutter web portfolio project.
+
+## Open For pull Request
+
+You can create issue and create pull request for the given respository.
+
+## Note
+
+**I know it needs lot of improvement and it is not responsive yet. I will fix it later.**
 
 ## Getting Started
 

@@ -22,16 +22,6 @@ class _AboutScreenState extends State<AboutScreen>
       });
     });
     return Container(
-//      decoration: BoxDecoration(
-//        gradient: LinearGradient(
-//          colors: [
-//            Colors.transparent,
-//            Colors.white12,
-//          ],
-//          begin: Alignment(0, -1),
-//          end: Alignment(0, 1),
-//        ),
-//      ),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -63,7 +53,7 @@ class _AboutScreenState extends State<AboutScreen>
                             "Who Me!\n",
                             style: GoogleFonts.comfortaa(
                               fontSize:
-                                  Theme.of(context).textTheme.display1.fontSize,
+                                  Theme.of(context).textTheme.display3.fontSize,
                               fontWeight: Theme.of(context)
                                   .textTheme
                                   .display1

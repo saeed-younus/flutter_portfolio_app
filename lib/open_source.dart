@@ -19,8 +19,8 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
             child: Text(
               "Open Source Projects",
               style: GoogleFonts.comfortaa(
-                fontSize: Theme.of(context).textTheme.display1.fontSize,
-                fontWeight: Theme.of(context).textTheme.display1.fontWeight,
+                fontSize: Theme.of(context).textTheme.display3.fontSize,
+                fontWeight: Theme.of(context).textTheme.display3.fontWeight,
               ),
             ),
           ),

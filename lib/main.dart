@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'about.dart';
 import 'article.dart';
+import 'contact.dart';
 import 'demo.dart';
 import 'home.dart';
 import 'open_source.dart';
@@ -301,6 +302,9 @@ class _HomePageState extends State<HomePage> {
     }
     if (index == 5) {
       return ArticleScreen();
+    }
+    if (index == 6) {
+      return ContactScreen();
     } else {
       return Text(index.toString());
     }

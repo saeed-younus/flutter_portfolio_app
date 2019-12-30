@@ -41,7 +41,7 @@ class _DemoScreenState extends State<DemoScreen> {
                           ),
                         ),
                         TextSpan(
-                          text: "Flutter\n",
+                          text: "Flutter",
                         ),
                       ],
                       style: GoogleFonts.comfortaa(
@@ -51,10 +51,12 @@ class _DemoScreenState extends State<DemoScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 100,
-                    height: 100,
-                    child: Image.asset("images/flutter_icon.png"),
+                  Center(
+                    child: SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Image.asset("images/flutter_icon.png"),
+                    ),
                   ),
                 ],
               ),
