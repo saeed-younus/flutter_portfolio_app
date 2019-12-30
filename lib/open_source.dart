@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:js' as js;
 
 class OpenSourceScreen extends StatefulWidget {
   @override
@@ -24,22 +25,59 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
             ),
           ),
           Container(
-            height: 250,
+            constraints: BoxConstraints(minHeight: 250, maxHeight: 300),
             margin: EdgeInsets.all(16),
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-                getCardItem("images/android_logo.png"),
-                getCardItem("images/flutter_logo.png"),
-                getCardItem("images/kotlin_logo.png"),
-                getCardItem("images/dart_logo.png."),
-                getCardItem("images/java_logo.png"),
-                getCardItem("images/2dimension_logo.png"),
-                getCardItem("images/firebase_logo.png"),
-                getCardItem("images/ml_kit_logo.png"),
-                getCardItem("images/unity_logo.png"),
-                getCardItem("images/php_logo.png"),
-                getCardItem("images/mysql_logo.png"),
+                getCardItem(
+                  "Android Library",
+                  "Finite Coverflow",
+                  "It is an android library which is used to create beautiful snapping animation for your Viewpager2.",
+                  () {
+                    js.context.callMethod("open",
+                        ["https://github.com/KoderLabs/finite-cover-flow"]);
+                  },
+                ),
+                getCardItem(
+                  "Android Library",
+                  "Overlay Service",
+                  "It is an android library which is used to create custom overlay just like PIP(Picture and picture) and it also have lower than 27 api support.",
+                  () {
+                    js.context.callMethod("open",
+                        ["https://github.com/KoderLabs/overlay-service"]);
+                  },
+                ),
+                getCardItem(
+                  "Android Example Code",
+                  "Motion Layout Examples",
+                  "In this project you can explore amazing animation which was created in motion layout.",
+                  () {
+                    js.context.callMethod("open", [
+                      "https://github.com/saeed-younus/motion-layout-examples"
+                    ]);
+                  },
+                ),
+                getCardItem(
+                  "Flutter Project",
+                  "Whats App Ui clone",
+                  "In this project I just clone whats app UI in flutter and I explore flutter is so fast, rubust and easy.",
+                  () {
+                    js.context.callMethod("open", [
+                      "https://github.com/saeed-younus/whatsapp_clone_flutter"
+                    ]);
+                  },
+                ),
+                getCardItem(
+                  "Flutter Project",
+                  "My Portfolio Web",
+                  "You are running this web it is created in flutter. You can see the code in github.",
+                  () {
+                    js.context.callMethod("open", [
+                      "https://github.com/saeed-younus/flutter_portfolio_app"
+                    ]);
+                  },
+                ),
               ],
             ),
           ),
@@ -48,45 +86,60 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
     );
   }
 
-  Widget getCardItem(String imageAssetName) {
+  Widget getCardItem(String openSourceType, String title, String description,
+      VoidCallback onTap) {
     return Container(
       width: 250,
       child: Card(
         elevation: 0,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Text(
-                "Android Library",
-                style: GoogleFonts.comfortaa(
-                  fontSize: Theme.of(context).textTheme.caption.fontSize,
-                  fontWeight: Theme.of(context).textTheme.caption.fontWeight,
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      openSourceType,
+                      style: GoogleFonts.comfortaa(
+                        fontSize: Theme.of(context).textTheme.caption.fontSize,
+                        fontWeight:
+                            Theme.of(context).textTheme.caption.fontWeight,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: Icon(Icons.open_in_new),
+                    ),
+                  ],
                 ),
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              Text(
-                "Coverflow",
-                style: GoogleFonts.comfortaa(
-                  textStyle: TextStyle(color: Colors.blue),
-                  fontSize: Theme.of(context).textTheme.headline.fontSize,
-                  fontWeight: Theme.of(context).textTheme.headline.fontWeight,
+                SizedBox(
+                  height: 24,
                 ),
-              ),
-              SizedBox(
-                height: 32,
-              ),
-              Text(
-                "It is an android library which is used to create beautiful snapping animation for your Viewpager2.",
-                style: GoogleFonts.comfortaa(
-                  fontSize: Theme.of(context).textTheme.body2.fontSize,
-                  fontWeight: Theme.of(context).textTheme.body2.fontWeight,
+                Text(
+                  title,
+                  style: GoogleFonts.comfortaa(
+                    textStyle: TextStyle(color: Colors.blue),
+                    fontSize: Theme.of(context).textTheme.headline.fontSize,
+                    fontWeight: Theme.of(context).textTheme.headline.fontWeight,
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 32,
+                ),
+                Text(
+                  description,
+                  style: GoogleFonts.comfortaa(
+                    fontSize: Theme.of(context).textTheme.body2.fontSize,
+                    fontWeight: Theme.of(context).textTheme.body2.fontWeight,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
