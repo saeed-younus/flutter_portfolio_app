@@ -32,8 +32,9 @@ class _DemoScreenState extends State<DemoScreen> {
                       children: [
                         TextSpan(
                           text: "Which is created in ",
-                          style: GoogleFonts.comfortaa(
-                            textStyle: TextStyle(color: Colors.white60),
+                          style: TextStyle(
+                            fontFamily: "Comfortaa",
+                            color: Colors.white60,
                             fontSize:
                                 Theme.of(context).textTheme.display2.fontSize,
                             fontWeight:
@@ -44,8 +45,9 @@ class _DemoScreenState extends State<DemoScreen> {
                           text: "Flutter",
                         ),
                       ],
-                      style: GoogleFonts.comfortaa(
-                        textStyle: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        fontFamily: "Comfortaa",
+                        color: Colors.white,
                         fontSize: Theme.of(context).textTheme.display3.fontSize,
                         fontWeight: FontWeight.w900,
                       ),
@@ -89,8 +91,9 @@ class _DemoScreenState extends State<DemoScreen> {
                   padding: EdgeInsets.all(16),
                   child: Text(
                     "You can run the demo by using common gestures. And change demo by clicking below buttons.",
-                    style: GoogleFonts.comfortaa(
-                      textStyle: TextStyle(color: Colors.white60),
+                    style: TextStyle(
+                      fontFamily: "Comfortaa",
+                      color: Colors.white60,
                       fontSize: Theme.of(context).textTheme.headline.fontSize,
                       fontWeight: FontWeight.w900,
                     ),
@@ -106,11 +109,11 @@ class _DemoScreenState extends State<DemoScreen> {
                   color: Colors.black54,
                   child: Text(
                     "Whatsapp",
-                    style: GoogleFonts.comfortaa(
-                      textStyle: TextStyle(
-                          color: _demoType == DemoEnum.whatsapp
-                              ? Colors.lightGreenAccent
-                              : Colors.white70),
+                    style: TextStyle(
+                      fontFamily: "Comfortaa",
+                      color: _demoType == DemoEnum.whatsapp
+                          ? Colors.lightGreenAccent
+                          : Colors.white70,
                       fontSize: Theme.of(context).textTheme.headline.fontSize,
                       fontWeight: FontWeight.w900,
                     ),
@@ -129,11 +132,11 @@ class _DemoScreenState extends State<DemoScreen> {
                   color: Colors.black54,
                   child: Text(
                     "Instagram",
-                    style: GoogleFonts.comfortaa(
-                      textStyle: TextStyle(
-                          color: _demoType == DemoEnum.instagram
-                              ? Colors.pinkAccent
-                              : Colors.white70),
+                    style: TextStyle(
+                      fontFamily: "Comfortaa",
+                      color: _demoType == DemoEnum.instagram
+                          ? Colors.pinkAccent
+                          : Colors.white70,
                       fontSize: Theme.of(context).textTheme.headline.fontSize,
                       fontWeight: FontWeight.w900,
                     ),

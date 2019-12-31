@@ -23,7 +23,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
             children: <Widget>[
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.all(32),
+                  padding: EdgeInsets.symmetric(vertical: 64),
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
@@ -44,7 +44,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                       getCardItem(
                         "images/android_logo.png",
                         "Motion Layout: Card Shuffle Animation",
-                        "Hi friends! In this article we will explore motion layout to get it’s excellence and create card shuffle animation as shown in video.",
+                        "In this article you will find how motion layout is easy and cool by creating card shuffle animation.",
                         Colors.greenAccent,
                         () {
                           js.context.callMethod("open", [
@@ -96,14 +96,12 @@ class _ArticleScreenState extends State<ArticleScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                RichText(
-                  text: TextSpan(
-                    text: "Published \nArticles",
-                    style: GoogleFonts.comfortaa(
-                      textStyle: TextStyle(color: Colors.white),
-                      fontSize: Theme.of(context).textTheme.display3.fontSize,
-                      fontWeight: FontWeight.w900,
-                    ),
+                Text(
+                  "Published \nArticles",
+                  style: TextStyle(
+                    fontFamily: "Comfortaa",
+                    fontSize: Theme.of(context).textTheme.display2.fontSize,
+                    fontWeight: FontWeight.w900,
                   ),
                 ),
               ],
@@ -118,7 +116,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
       Color titleColor, VoidCallback onTap) {
     return Container(
       margin: EdgeInsets.all(16),
-      width: 400,
+      width: 350,
       height: 300,
       child: Card(
         child: InkWell(
@@ -140,8 +138,9 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 ),
                 Text(
                   title,
-                  style: GoogleFonts.comfortaa(
-                    textStyle: TextStyle(color: titleColor),
+                  style: TextStyle(
+                    color: titleColor,
+                    fontFamily: "Comfortaa",
                     fontSize: Theme.of(context).textTheme.headline.fontSize,
                     fontWeight: Theme.of(context).textTheme.headline.fontWeight,
                   ),
@@ -151,9 +150,9 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 ),
                 Text(
                   description,
-                  style: GoogleFonts.comfortaa(
-                    fontSize: Theme.of(context).textTheme.headline.fontSize,
-                    fontWeight: Theme.of(context).textTheme.headline.fontWeight,
+                  style: TextStyle(
+                    fontFamily: "Comfortaa",
+                    fontSize: 18,
                   ),
                 ),
               ],

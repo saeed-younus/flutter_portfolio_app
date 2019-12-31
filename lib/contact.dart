@@ -31,14 +31,16 @@ class _ContactScreenState extends State<ContactScreen>
           ),
           Text(
             "Contact",
-            style: GoogleFonts.comfortaa(
-              fontSize: Theme.of(context).textTheme.display3.fontSize,
-              fontWeight: Theme.of(context).textTheme.display3.fontWeight,
+            style: TextStyle(
+              fontFamily: "Comfortaa",
+              fontSize: Theme.of(context).textTheme.display2.fontSize,
+              fontWeight: Theme.of(context).textTheme.display2.fontWeight,
             ),
           ),
           Text(
-            "You can contact me everywhere you wanted! I am active on all platform.",
-            style: GoogleFonts.comfortaa(
+            "\nYou can contact me everywhere you wanted! I am active on all platform.",
+            style: TextStyle(
+              fontFamily: "Comfortaa",
               fontSize: Theme.of(context).textTheme.headline.fontSize,
               fontWeight: Theme.of(context).textTheme.headline.fontWeight,
             ),
@@ -93,9 +95,11 @@ class _ContactScreenState extends State<ContactScreen>
               height: 64,
               child: Image.asset(assetName),
             ),
+            SizedBox(height: 8),
             Text(
               title,
-              style: GoogleFonts.comfortaa(
+              style: TextStyle(
+                fontFamily: "Comfortaa",
                 fontSize: Theme.of(context).textTheme.body1.fontSize,
                 fontWeight: Theme.of(context).textTheme.body1.fontWeight,
               ),

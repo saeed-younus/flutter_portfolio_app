@@ -16,12 +16,13 @@ class _SkillScreenState extends State<SkillScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(top: 48.0),
+            padding: const EdgeInsets.only(top: 32.0),
             child: Text(
               "Skills",
-              style: GoogleFonts.comfortaa(
-                fontSize: Theme.of(context).textTheme.display3.fontSize,
-                fontWeight: Theme.of(context).textTheme.display3.fontWeight,
+              style: TextStyle(
+                fontFamily: "Comfortaa",
+                fontSize: Theme.of(context).textTheme.display2.fontSize,
+                fontWeight: Theme.of(context).textTheme.display2.fontWeight,
               ),
             ),
           ),
@@ -33,7 +34,7 @@ class _SkillScreenState extends State<SkillScreen> {
                   Wrap(
                     alignment: WrapAlignment.center,
                     children: <Widget>[
-                      getCardItem("images/android_logo.png", "android"),
+                      getCardItem("images/android_logo.png", "Android"),
                       getCardItem("images/flutter_icon.png", "Flutter"),
                       getCardItem("images/kotlin_logo.png", " Kotlin"),
                       getCardItem("images/dart_logo.png.", "Dart"),
@@ -42,10 +43,10 @@ class _SkillScreenState extends State<SkillScreen> {
                       getCardItem("images/firebase_logo.png", "Firebase"),
                       getCardItem("images/ml_kit_logo.png", "ML Kit"),
                       getCardItem("images/dialogflow_logo.png", "Dialogflow"),
-                      getCardItem("images/unity_logo.png", "unity"),
+                      getCardItem("images/unity_logo.png", "Unity"),
                       getCardItem("images/3ds_max_logo.png", "3ds Max"),
                       getCardItem("images/php_logo.png", "php"),
-                      getCardItem("images/mysql_logo.png", "mysql"),
+                      getCardItem("images/mysql_logo.png", "MySql"),
                     ],
                   ),
                 ],
@@ -66,8 +67,8 @@ class _SkillScreenState extends State<SkillScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Container(
-              width: 200,
-              height: 100,
+              width: 150,
+              height: 75,
               child: Image.asset(imageAssetName),
             ),
             SizedBox(
@@ -75,9 +76,9 @@ class _SkillScreenState extends State<SkillScreen> {
             ),
             Text(
               text,
-              style: GoogleFonts.comfortaa(
-                fontSize: 18,
-                fontWeight: FontWeight.w900,
+              style: TextStyle(
+                fontFamily: "OpenSans",
+                fontSize: 20,
               ),
             ),
           ],

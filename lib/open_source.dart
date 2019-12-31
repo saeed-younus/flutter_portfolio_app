@@ -15,12 +15,13 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(top: 48.0),
+            padding: const EdgeInsets.only(top: 32.0),
             child: Text(
               "Open Source Projects",
-              style: GoogleFonts.comfortaa(
-                fontSize: Theme.of(context).textTheme.display3.fontSize,
-                fontWeight: Theme.of(context).textTheme.display3.fontWeight,
+              style: TextStyle(
+                fontFamily: "Comfortaa",
+                fontSize: Theme.of(context).textTheme.display2.fontSize,
+                fontWeight: Theme.of(context).textTheme.display2.fontWeight,
               ),
             ),
           ),
@@ -34,6 +35,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   "Android Library",
                   "Finite Coverflow",
                   "It is an android library which is used to create beautiful snapping animation for your Viewpager2.",
+                  Colors.greenAccent,
                   () {
                     js.context.callMethod("open",
                         ["https://github.com/KoderLabs/finite-cover-flow"]);
@@ -43,6 +45,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   "Android Library",
                   "Overlay Service",
                   "It is an android library which is used to create custom overlay just like PIP(Picture and picture) and it also have lower than 27 api support.",
+                  Colors.greenAccent,
                   () {
                     js.context.callMethod("open",
                         ["https://github.com/KoderLabs/overlay-service"]);
@@ -52,6 +55,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   "Android Example Code",
                   "Motion Layout Examples",
                   "In this project you can explore amazing animation which was created in motion layout.",
+                  Colors.greenAccent,
                   () {
                     js.context.callMethod("open", [
                       "https://github.com/saeed-younus/motion-layout-examples"
@@ -62,6 +66,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   "Flutter Project",
                   "Whats App Ui clone",
                   "In this project I just clone whats app UI in flutter and I explore flutter is so fast, rubust and easy.",
+                  Colors.lightBlueAccent,
                   () {
                     js.context.callMethod("open", [
                       "https://github.com/saeed-younus/whatsapp_clone_flutter"
@@ -72,6 +77,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   "Flutter Project",
                   "My Portfolio Web",
                   "You are running this web it is created in flutter. You can see the code in github.",
+                  Colors.lightBlueAccent,
                   () {
                     js.context.callMethod("open", [
                       "https://github.com/saeed-younus/flutter_portfolio_app"
@@ -87,7 +93,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
   }
 
   Widget getCardItem(String openSourceType, String title, String description,
-      VoidCallback onTap) {
+      Color titleColor, VoidCallback onTap) {
     return Container(
       width: 250,
       child: Card(
@@ -104,7 +110,8 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   children: <Widget>[
                     Text(
                       openSourceType,
-                      style: GoogleFonts.comfortaa(
+                      style: TextStyle(
+                        fontFamily: "Comfortaa",
                         fontSize: Theme.of(context).textTheme.caption.fontSize,
                         fontWeight:
                             Theme.of(context).textTheme.caption.fontWeight,
@@ -122,8 +129,9 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                 ),
                 Text(
                   title,
-                  style: GoogleFonts.comfortaa(
-                    textStyle: TextStyle(color: Colors.blue),
+                  style: TextStyle(
+                    fontFamily: "Comfortaa",
+                    color: titleColor,
                     fontSize: Theme.of(context).textTheme.headline.fontSize,
                     fontWeight: Theme.of(context).textTheme.headline.fontWeight,
                   ),
@@ -133,7 +141,8 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                 ),
                 Text(
                   description,
-                  style: GoogleFonts.comfortaa(
+                  style: TextStyle(
+                    fontFamily: "Comfortaa",
                     fontSize: Theme.of(context).textTheme.body2.fontSize,
                     fontWeight: Theme.of(context).textTheme.body2.fontWeight,
                   ),

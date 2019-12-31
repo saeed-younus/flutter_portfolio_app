@@ -50,10 +50,11 @@ class _AboutScreenState extends State<AboutScreen>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Who Me!\n",
-                            style: GoogleFonts.comfortaa(
+                            "About Me!\n",
+                            style: TextStyle(
+                              fontFamily: "Comfortaa",
                               fontSize:
-                                  Theme.of(context).textTheme.display3.fontSize,
+                                  Theme.of(context).textTheme.display2.fontSize,
                               fontWeight: Theme.of(context)
                                   .textTheme
                                   .display1
@@ -67,29 +68,40 @@ class _AboutScreenState extends State<AboutScreen>
                                 TextSpan(
                                   text:
                                       "Android, PHP, Unity and Flutter developer. ",
-                                  style: GoogleFonts.comfortaa(
-                                    textStyle: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                    fontFamily: "Comfortaa",
+                                    color: Colors.white,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
                                 TextSpan(
                                   text:
                                       "I am tech-enthsuast and always keen for sharing my knowledge to others. ",
+                                  style: TextStyle(
+                                    fontFamily: "Comfortaa",
+                                    fontWeight: FontWeight.w900,
+                                  ),
                                 ),
                                 TextSpan(
                                   text:
                                       "Programming is my passion. Love android, flutter and creative designs.",
+                                  style: TextStyle(
+                                    fontFamily: "Comfortaa",
+                                    fontWeight: FontWeight.w900,
+                                  ),
                                 ),
                                 TextSpan(
                                   text:
                                       "\n\nI am always looking for my weakness and thankful to those who teach, support and pray for me.",
-                                  style: GoogleFonts.comfortaa(
-                                    textStyle: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                    fontFamily: "Comfortaa",
+                                    color: Colors.white,
                                   ),
                                 ),
                               ],
-                              style: GoogleFonts.comfortaa(
-                                textStyle: TextStyle(color: Colors.white54),
+                              style: TextStyle(
+                                fontFamily: "Comfortaa",
+                                color: Colors.white54,
                                 fontSize: Theme.of(context)
                                     .textTheme
                                     .headline

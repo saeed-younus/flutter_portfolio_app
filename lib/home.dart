@@ -71,15 +71,17 @@ class _HomeScreenState extends State<HomeScreen>
                   children: [
                     TextSpan(
                       text: "Muhammad Saeed",
-                      style: GoogleFonts.comfortaa(
-                        textStyle: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Comfortaa",
                         fontSize: Theme.of(context).textTheme.display1.fontSize,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
                   ],
-                  style: GoogleFonts.comfortaa(
-                    textStyle: TextStyle(color: Colors.white60),
+                  style: TextStyle(
+                    color: Colors.white60,
+                    fontFamily: "OpenSans",
                     fontSize: Theme.of(context).textTheme.display1.fontSize,
                     fontWeight: Theme.of(context).textTheme.display1.fontWeight,
                   ),

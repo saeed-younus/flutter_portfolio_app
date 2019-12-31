@@ -69,10 +69,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Color _backgroundColor = Colors.red[900];
   var _selectedPageIndex = 0;
   var _pageController = PageController();
 
+  Color _backgroundColor = Colors.red;
   bool _headerShadow = false;
 
   @override
@@ -110,49 +110,53 @@ class _HomePageState extends State<HomePage> {
                       ),
                       child: RichText(
                         text: TextSpan(
+                          style: TextStyle(
+                            color:
+                                Theme.of(context).primaryTextTheme.body1.color,
+                          ),
                           children: [
                             TextSpan(
                               text: "M",
-                              style: GoogleFonts.caveat(
-                                textStyle: TextStyle(color: Colors.white70),
+                              style: TextStyle(
+                                fontFamily: 'Caveat',
                                 fontSize: 32,
                                 fontWeight: FontWeight.w900,
                               ),
                             ),
                             TextSpan(
                               text: "uhammad ",
-                              style: GoogleFonts.caveat(
-                                textStyle: TextStyle(color: Colors.white70),
+                              style: TextStyle(
+                                fontFamily: 'Caveat',
                                 fontSize: 20,
                               ),
                             ),
                             TextSpan(
                               text: "S",
-                              style: GoogleFonts.caveat(
-                                textStyle: TextStyle(color: Colors.white70),
+                              style: TextStyle(
+                                fontFamily: 'Caveat',
                                 fontSize: 32,
                                 fontWeight: FontWeight.w900,
                               ),
                             ),
                             TextSpan(
                               text: "aeed ",
-                              style: GoogleFonts.caveat(
-                                textStyle: TextStyle(color: Colors.white70),
+                              style: TextStyle(
+                                fontFamily: 'Caveat',
                                 fontSize: 20,
                               ),
                             ),
                             TextSpan(
                               text: "Y",
-                              style: GoogleFonts.caveat(
-                                textStyle: TextStyle(color: Colors.white70),
+                              style: TextStyle(
+                                fontFamily: 'Caveat',
                                 fontSize: 32,
                                 fontWeight: FontWeight.w900,
                               ),
                             ),
                             TextSpan(
                               text: "ounus",
-                              style: GoogleFonts.caveat(
-                                textStyle: TextStyle(color: Colors.white70),
+                              style: TextStyle(
+                                fontFamily: 'Caveat',
                                 fontSize: 20,
                               ),
                             ),
@@ -173,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                             },
                           ),
                           CircleButton(
-                            "Who Me",
+                            "About Me",
                             materialColor: Colors.orange,
                             shadowColor: Colors.orangeAccent,
                             isSelected: _selectedPageIndex == 1,
@@ -200,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                             },
                           ),
                           CircleButton(
-                            "Demos",
+                            "Demo",
                             materialColor: Colors.blue,
                             shadowColor: Colors.blueAccent,
                             isSelected: _selectedPageIndex == 4,
@@ -374,11 +378,9 @@ class _CircleButtonState extends State<CircleButton> {
                   child: Text(
                     widget.text,
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.comfortaa(
-                      textStyle: TextStyle(
-                          color: widget.isSelected
-                              ? Colors.white
-                              : Colors.white54),
+                    style: TextStyle(
+                      color: widget.isSelected ? Colors.white : Colors.white54,
+                      fontFamily: "Comfortaa",
                       fontSize: Theme.of(context).textTheme.body1.fontSize,
                       fontWeight: FontWeight.w900,
                     ),
