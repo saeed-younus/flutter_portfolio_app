@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'dart:js' as js;
 
 class OpenSourceScreen extends StatefulWidget {
@@ -8,6 +7,19 @@ class OpenSourceScreen extends StatefulWidget {
 }
 
 class _OpenSourceScreenState extends State<OpenSourceScreen> {
+  bool isDesktop = true;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    var size = MediaQuery.of(context).size;
+    if (size.width > size.height) {
+      isDesktop = true;
+    } else {
+      isDesktop = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,9 +30,12 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
             padding: const EdgeInsets.only(top: 32.0),
             child: Text(
               "Open Source Projects",
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: "Comfortaa",
-                fontSize: Theme.of(context).textTheme.display2.fontSize,
+                fontSize: isDesktop
+                    ? Theme.of(context).textTheme.display2.fontSize
+                    : Theme.of(context).textTheme.display1.fontSize,
                 fontWeight: Theme.of(context).textTheme.display2.fontWeight,
               ),
             ),
@@ -31,7 +46,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-                getCardItem(
+                OpenSourceCardItem(
                   "Android Library",
                   "Finite Coverflow",
                   "It is an android library which is used to create beautiful snapping animation for your Viewpager2.",
@@ -41,7 +56,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                         ["https://github.com/KoderLabs/finite-cover-flow"]);
                   },
                 ),
-                getCardItem(
+                OpenSourceCardItem(
                   "Android Library",
                   "Overlay Service",
                   "It is an android library which is used to create custom overlay just like PIP(Picture and picture) and it also have lower than 27 api support.",
@@ -51,7 +66,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                         ["https://github.com/KoderLabs/overlay-service"]);
                   },
                 ),
-                getCardItem(
+                OpenSourceCardItem(
                   "Android Example Code",
                   "Motion Layout Examples",
                   "In this project you can explore amazing animation which was created in motion layout.",
@@ -62,7 +77,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                     ]);
                   },
                 ),
-                getCardItem(
+                OpenSourceCardItem(
                   "Flutter Project",
                   "Whats App Ui clone",
                   "In this project I just clone whats app UI in flutter and I explore flutter is so fast, rubust and easy.",
@@ -73,7 +88,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                     ]);
                   },
                 ),
-                getCardItem(
+                OpenSourceCardItem(
                   "Flutter Project",
                   "My Portfolio Web",
                   "You are running this web it is created in flutter. You can see the code in github.",
@@ -91,9 +106,25 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
       ),
     );
   }
+}
 
-  Widget getCardItem(String openSourceType, String title, String description,
-      Color titleColor, VoidCallback onTap) {
+class OpenSourceCardItem extends StatelessWidget {
+  String openSourceType;
+  String title;
+  String description;
+  Color titleColor;
+  VoidCallback onTap;
+
+  OpenSourceCardItem(
+    this.openSourceType,
+    this.title,
+    this.description,
+    this.titleColor,
+    this.onTap,
+  ) : super();
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       width: 250,
       child: Card(
@@ -120,20 +151,24 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                     SizedBox(
                       height: 24,
                       width: 24,
-                      child: Icon(Icons.open_in_new),
+                      child: const Icon(Icons.open_in_new),
                     ),
                   ],
                 ),
                 SizedBox(
                   height: 24,
                 ),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontFamily: "Comfortaa",
-                    color: titleColor,
-                    fontSize: Theme.of(context).textTheme.headline.fontSize,
-                    fontWeight: Theme.of(context).textTheme.headline.fontWeight,
+                SizedBox(
+                  height: 60,
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontFamily: "Comfortaa",
+                      color: titleColor,
+                      fontSize: Theme.of(context).textTheme.headline.fontSize,
+                      fontWeight:
+                          Theme.of(context).textTheme.headline.fontWeight,
+                    ),
                   ),
                 ),
                 SizedBox(

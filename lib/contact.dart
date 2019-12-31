@@ -10,30 +10,34 @@ class ContactScreen extends StatefulWidget {
   _ContactScreenState createState() => _ContactScreenState();
 }
 
-class _ContactScreenState extends State<ContactScreen>
-    with SingleTickerProviderStateMixin {
-  double _opacity = 0;
-  Alignment _alignment = Alignment(0, 0.2);
+class _ContactScreenState extends State<ContactScreen> {
+  bool isDesktop = true;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    var size = MediaQuery.of(context).size;
+    if (size.width > size.height) {
+      isDesktop = true;
+    } else {
+      isDesktop = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 100), () {
-      setState(() {
-        _opacity = 1;
-        _alignment = Alignment(0, 0);
-      });
-    });
     return Container(
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: <Widget>[
-          SizedBox(
-            height: 50,
-          ),
+          const SizedBox(height: 50),
           Text(
             "Contact",
             style: TextStyle(
               fontFamily: "Comfortaa",
-              fontSize: Theme.of(context).textTheme.display2.fontSize,
+              fontSize: isDesktop
+                  ? Theme.of(context).textTheme.display2.fontSize
+                  : Theme.of(context).textTheme.display1.fontSize,
               fontWeight: Theme.of(context).textTheme.display2.fontWeight,
             ),
           ),
@@ -41,38 +45,66 @@ class _ContactScreenState extends State<ContactScreen>
             "\nYou can contact me everywhere you wanted! I am active on all platform.",
             style: TextStyle(
               fontFamily: "Comfortaa",
-              fontSize: Theme.of(context).textTheme.headline.fontSize,
+              fontSize: isDesktop
+                  ? Theme.of(context).textTheme.headline.fontSize
+                  : Theme.of(context).textTheme.title.fontSize,
               fontWeight: Theme.of(context).textTheme.headline.fontWeight,
             ),
           ),
+          const SizedBox(height: 16),
           Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: Wrap(
+              direction: Axis.horizontal,
+              spacing: 50,
               children: <Widget>[
-                getContactItem("images/instagram.png", "Instagram", () {
-                  js.context.callMethod("open",
-                      ["https://www.instagram.com/muhammad_saeed_younus/"]);
-                }),
-                getContactItem("images/facebook.png", "Facebook", () {
-                  js.context.callMethod("open",
-                      ["https://www.facebook.com/saeed.younus.attari/"]);
-                }),
-                getContactItem("images/twitter.png", "Twitter", () {
-                  js.context.callMethod(
-                      "open", ["https://twitter.com/Muhamma61725608/"]);
-                }),
-                getContactItem("images/github.png", "Github", () {
-                  js.context
-                      .callMethod("open", ["https://github.com/saeed-younus"]);
-                }),
-                getContactItem("images/medium.png", "Medium", () {
-                  js.context
-                      .callMethod("open", ["https://medium.com/@sendtosaeed2"]);
-                }),
-                getContactItem("images/skype.png", "Skype", () {
-                  js.context.callMethod(
-                      "open", ["https://join.skype.com/invite/mUnZReqK9kcQ"]);
-                }),
+                ContactItem(
+                  "images/instagram.png",
+                  "Instagram",
+                  () {
+                    js.context.callMethod("open",
+                        ["https://www.instagram.com/muhammad_saeed_younus/"]);
+                  },
+                ),
+                ContactItem(
+                  "images/facebook.png",
+                  "Facebook",
+                  () {
+                    js.context.callMethod("open",
+                        ["https://www.facebook.com/saeed.younus.attari/"]);
+                  },
+                ),
+                ContactItem(
+                  "images/twitter.png",
+                  "Twitter",
+                  () {
+                    js.context.callMethod(
+                        "open", ["https://twitter.com/Muhamma61725608/"]);
+                  },
+                ),
+                ContactItem(
+                  "images/github.png",
+                  "Github",
+                  () {
+                    js.context.callMethod(
+                        "open", ["https://github.com/saeed-younus"]);
+                  },
+                ),
+                ContactItem(
+                  "images/medium.png",
+                  "Medium",
+                  () {
+                    js.context.callMethod(
+                        "open", ["https://medium.com/@sendtosaeed2"]);
+                  },
+                ),
+                ContactItem(
+                  "images/skype.png",
+                  "Skype",
+                  () {
+                    js.context.callMethod(
+                        "open", ["https://join.skype.com/invite/mUnZReqK9kcQ"]);
+                  },
+                ),
               ],
             ),
           ),
@@ -80,8 +112,21 @@ class _ContactScreenState extends State<ContactScreen>
       ),
     );
   }
+}
 
-  Widget getContactItem(String assetName, String title, VoidCallback onTap) {
+class ContactItem extends StatelessWidget {
+  String assetName;
+  String title;
+  VoidCallback onTap;
+
+  ContactItem(
+    this.assetName,
+    this.title,
+    this.onTap,
+  ) : super();
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       height: 100,
       width: 100,
@@ -95,7 +140,7 @@ class _ContactScreenState extends State<ContactScreen>
               height: 64,
               child: Image.asset(assetName),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               title,
               style: TextStyle(

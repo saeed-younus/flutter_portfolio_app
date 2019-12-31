@@ -9,6 +9,19 @@ class SkillScreen extends StatefulWidget {
 }
 
 class _SkillScreenState extends State<SkillScreen> {
+  bool isDesktop = true;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    var size = MediaQuery.of(context).size;
+    if (size.width > size.height) {
+      isDesktop = true;
+    } else {
+      isDesktop = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +34,9 @@ class _SkillScreenState extends State<SkillScreen> {
               "Skills",
               style: TextStyle(
                 fontFamily: "Comfortaa",
-                fontSize: Theme.of(context).textTheme.display2.fontSize,
+                fontSize: isDesktop
+                    ? Theme.of(context).textTheme.display2.fontSize
+                    : Theme.of(context).textTheme.display1.fontSize,
                 fontWeight: Theme.of(context).textTheme.display2.fontWeight,
               ),
             ),
@@ -34,19 +49,19 @@ class _SkillScreenState extends State<SkillScreen> {
                   Wrap(
                     alignment: WrapAlignment.center,
                     children: <Widget>[
-                      getCardItem("images/android_logo.png", "Android"),
-                      getCardItem("images/flutter_icon.png", "Flutter"),
-                      getCardItem("images/kotlin_logo.png", " Kotlin"),
-                      getCardItem("images/dart_logo.png.", "Dart"),
-                      getCardItem("images/java_logo.png", "Java"),
-                      getCardItem("images/flare_logo.png", "Flare"),
-                      getCardItem("images/firebase_logo.png", "Firebase"),
-                      getCardItem("images/ml_kit_logo.png", "ML Kit"),
-                      getCardItem("images/dialogflow_logo.png", "Dialogflow"),
-                      getCardItem("images/unity_logo.png", "Unity"),
-                      getCardItem("images/3ds_max_logo.png", "3ds Max"),
-                      getCardItem("images/php_logo.png", "php"),
-                      getCardItem("images/mysql_logo.png", "MySql"),
+                      SkillItem("images/android_logo.png", "Android"),
+                      SkillItem("images/flutter_icon.png", "Flutter"),
+                      SkillItem("images/kotlin_logo.png", " Kotlin"),
+                      SkillItem("images/dart_logo.png.", "Dart"),
+                      SkillItem("images/java_logo.png", "Java"),
+                      SkillItem("images/flare_logo.png", "Flare"),
+                      SkillItem("images/firebase_logo.png", "Firebase"),
+                      SkillItem("images/ml_kit_logo.png", "ML Kit"),
+                      SkillItem("images/dialogflow_logo.png", "Dialogflow"),
+                      SkillItem("images/unity_logo.png", "Unity"),
+                      SkillItem("images/3ds_max_logo.png", "3ds Max"),
+                      SkillItem("images/php_logo.png", "php"),
+                      SkillItem("images/mysql_logo.png", "MySql"),
                     ],
                   ),
                 ],
@@ -57,8 +72,26 @@ class _SkillScreenState extends State<SkillScreen> {
       ),
     );
   }
+}
 
-  Widget getCardItem(String imageAssetName, String text) {
+class SkillItem extends StatelessWidget {
+  final String _imageAssetName;
+  final String _text;
+
+  SkillItem(
+    this._imageAssetName,
+    this._text,
+  ) : super();
+
+  @override
+  Widget build(BuildContext context) {
+    bool isDesktop = true;
+    var size = MediaQuery.of(context).size;
+    if (size.width > size.height) {
+      isDesktop = true;
+    } else {
+      isDesktop = false;
+    }
     return Card(
       elevation: 0,
       child: Padding(
@@ -67,16 +100,16 @@ class _SkillScreenState extends State<SkillScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Container(
-              width: 150,
-              height: 75,
-              child: Image.asset(imageAssetName),
+              width: isDesktop ? 150 : 100,
+              height: isDesktop ? 75 : 50,
+              child: Image.asset(_imageAssetName),
             ),
             SizedBox(
               height: 8,
             ),
             Text(
-              text,
-              style: TextStyle(
+              _text,
+              style: const TextStyle(
                 fontFamily: "OpenSans",
                 fontSize: 20,
               ),

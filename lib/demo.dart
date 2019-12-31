@@ -14,14 +14,28 @@ enum DemoEnum { whatsapp, instagram }
 class _DemoScreenState extends State<DemoScreen> {
   DemoEnum _demoType = DemoEnum.whatsapp;
 
+  bool isDesktop = true;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    var size = MediaQuery.of(context).size;
+    if (size.width > size.height) {
+      isDesktop = true;
+    } else {
+      isDesktop = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(16),
       child: Row(
         children: <Widget>[
           Expanded(
             child: Padding(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.only(right: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -35,8 +49,9 @@ class _DemoScreenState extends State<DemoScreen> {
                           style: TextStyle(
                             fontFamily: "Comfortaa",
                             color: Colors.white60,
-                            fontSize:
-                                Theme.of(context).textTheme.display2.fontSize,
+                            fontSize: isDesktop
+                                ? Theme.of(context).textTheme.display2.fontSize
+                                : Theme.of(context).textTheme.display1.fontSize,
                             fontWeight:
                                 Theme.of(context).textTheme.display2.fontWeight,
                           ),
@@ -48,64 +63,86 @@ class _DemoScreenState extends State<DemoScreen> {
                       style: TextStyle(
                         fontFamily: "Comfortaa",
                         color: Colors.white,
-                        fontSize: Theme.of(context).textTheme.display3.fontSize,
+                        fontSize: isDesktop
+                            ? Theme.of(context).textTheme.display2.fontSize
+                            : Theme.of(context).textTheme.display1.fontSize,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
                   ),
                   Center(
-                    child: SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: Image.asset("images/flutter_icon.png"),
-                    ),
+                    child: isDesktop
+                        ? SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: Image.asset("images/flutter_icon.png"),
+                          )
+                        : const SizedBox(),
                   ),
                 ],
               ),
             ),
           ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    margin: EdgeInsets.all(16),
-                    child: Card(
-                      child: MaterialApp(
-                        debugShowCheckedModeBanner: false,
-                        theme: ThemeData.light(),
-                        home: getDemo(),
+          isDesktop
+              ? AspectRatio(
+                  aspectRatio: 10 / 16,
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        child: AspectRatio(
+                          aspectRatio: 10 / 16,
+                          child: MaterialApp(
+                            debugShowCheckedModeBanner: false,
+                            theme: ThemeData.light(),
+                            home: getDemo(),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          ),
+                )
+              : const SizedBox(),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.only(left: 8),
                   child: Text(
                     "You can run the demo by using common gestures. And change demo by clicking below buttons.",
                     style: TextStyle(
                       fontFamily: "Comfortaa",
                       color: Colors.white60,
-                      fontSize: Theme.of(context).textTheme.headline.fontSize,
+                      fontSize: isDesktop
+                          ? Theme.of(context).textTheme.headline.fontSize
+                          : Theme.of(context).textTheme.title.fontSize,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                 ),
                 RaisedButton(
                   onPressed: () {
-                    setState(() {
+                    if (isDesktop) {
+                      setState(() {
+                        _demoType = DemoEnum.whatsapp;
+                      });
+                    } else {
                       _demoType = DemoEnum.whatsapp;
-                    });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return MaterialApp(
+                              debugShowCheckedModeBanner: false,
+                              theme: ThemeData.light(),
+                              home: getDemo(),
+                            );
+                          },
+                        ),
+                      );
+                    }
                   },
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   color: Colors.black54,
                   child: Text(
                     "Whatsapp",
@@ -114,21 +151,37 @@ class _DemoScreenState extends State<DemoScreen> {
                       color: _demoType == DemoEnum.whatsapp
                           ? Colors.lightGreenAccent
                           : Colors.white70,
-                      fontSize: Theme.of(context).textTheme.headline.fontSize,
+                      fontSize: isDesktop
+                          ? Theme.of(context).textTheme.headline.fontSize
+                          : Theme.of(context).textTheme.title.fontSize,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 8,
-                ),
+                const SizedBox(height: 8),
                 RaisedButton(
                   onPressed: () {
-                    setState(() {
+                    if (isDesktop) {
+                      setState(() {
+                        _demoType = DemoEnum.instagram;
+                      });
+                    } else {
                       _demoType = DemoEnum.instagram;
-                    });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return MaterialApp(
+                              debugShowCheckedModeBanner: false,
+                              theme: ThemeData.light(),
+                              home: getDemo(),
+                            );
+                          },
+                        ),
+                      );
+                    }
                   },
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   color: Colors.black54,
                   child: Text(
                     "Instagram",
@@ -137,7 +190,9 @@ class _DemoScreenState extends State<DemoScreen> {
                       color: _demoType == DemoEnum.instagram
                           ? Colors.pinkAccent
                           : Colors.white70,
-                      fontSize: Theme.of(context).textTheme.headline.fontSize,
+                      fontSize: isDesktop
+                          ? Theme.of(context).textTheme.headline.fontSize
+                          : Theme.of(context).textTheme.title.fontSize,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
