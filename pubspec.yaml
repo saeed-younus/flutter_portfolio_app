@@ -26,6 +26,7 @@ dependencies:
   google_fonts: ^0.2.0
   webview_flutter: ^0.3.18+1
   flutter_webview_plugin: ^0.3.10
+  rxdart: ^0.22.4
 
 dev_dependencies:
   flutter_test:

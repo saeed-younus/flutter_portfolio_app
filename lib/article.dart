@@ -89,11 +89,16 @@ class _ArticleScreenState extends State<ArticleScreen> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Theme.of(context).canvasColor,
-                          Colors.transparent,
+                          Theme.of(context).scaffoldBackgroundColor,
+                          Color.fromRGBO(
+                            Theme.of(context).scaffoldBackgroundColor.red,
+                            Theme.of(context).scaffoldBackgroundColor.green,
+                            Theme.of(context).scaffoldBackgroundColor.blue,
+                            0,
+                          ),
                         ],
                         begin: const Alignment(-0.95, 0),
-                        end: const Alignment(-0.25, 0),
+                        end: const Alignment(-0.1, 0),
                       ),
                     ),
                   ),

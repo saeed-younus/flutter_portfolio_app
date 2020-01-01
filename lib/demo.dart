@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:web_portfolio/demo/RxListScreen.dart';
 import 'demo/Instagram.dart';
 import 'demo/WhatsApp.dart';
 
@@ -9,7 +10,7 @@ class DemoScreen extends StatefulWidget {
   _DemoScreenState createState() => _DemoScreenState();
 }
 
-enum DemoEnum { whatsapp, instagram }
+enum DemoEnum { whatsapp, instagram, todo }
 
 class _DemoScreenState extends State<DemoScreen> {
   DemoEnum _demoType = DemoEnum.whatsapp;
@@ -197,6 +198,44 @@ class _DemoScreenState extends State<DemoScreen> {
                     ),
                   ),
                 ),
+                RaisedButton(
+                  onPressed: () {
+                    if (isDesktop) {
+                      setState(() {
+                        _demoType = DemoEnum.todo;
+                      });
+                    } else {
+                      _demoType = DemoEnum.todo;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return MaterialApp(
+                              debugShowCheckedModeBanner: false,
+                              theme: ThemeData.light(),
+                              home: getDemo(),
+                            );
+                          },
+                        ),
+                      );
+                    }
+                  },
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.black54,
+                  child: Text(
+                    "Todo List",
+                    style: TextStyle(
+                      fontFamily: "Comfortaa",
+                      color: _demoType == DemoEnum.todo
+                          ? Colors.blueAccent
+                          : Colors.white70,
+                      fontSize: isDesktop
+                          ? Theme.of(context).textTheme.headline.fontSize
+                          : Theme.of(context).textTheme.title.fontSize,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -209,10 +248,10 @@ class _DemoScreenState extends State<DemoScreen> {
     switch (_demoType) {
       case DemoEnum.whatsapp:
         return WhatsApp();
-        break;
       case DemoEnum.instagram:
         return Instagram();
-        break;
+      case DemoEnum.todo:
+        return RxListScreen();
     }
   }
 }
