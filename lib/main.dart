@@ -112,7 +112,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
       body: Container(
-        color: Theme.of(context).primaryColor,
         child: Column(
           children: <Widget>[
             //App Bar
@@ -131,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                               )
                             ]
                           : [],
+                      color: Theme.of(context).primaryColorDark,
                     ),
                     child: Material(
                       elevation: 0,

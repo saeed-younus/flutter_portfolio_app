@@ -98,7 +98,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                           ),
                         ],
                         begin: const Alignment(-0.95, 0),
-                        end: const Alignment(-0.1, 0),
+                        end: const Alignment(0.1, 0),
                       ),
                     ),
                   ),
