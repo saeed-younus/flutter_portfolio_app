@@ -73,13 +73,13 @@ class _AboutScreenState extends State<AboutScreen>
                         Text(
                           "About Me!\n",
                           style: TextStyle(
-                            fontFamily: "Comfortaa",
+                            fontFamily: "Roboto",
                             fontSize: isDesktop
                                 ? Theme.of(context).textTheme.display2.fontSize
                                 : Theme.of(context).textTheme.display1.fontSize,
-                            fontWeight:
-                                Theme.of(context).textTheme.display1.fontWeight,
+                            fontWeight: FontWeight.w500,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                         RichText(
                           text: TextSpan(
@@ -89,47 +89,40 @@ class _AboutScreenState extends State<AboutScreen>
                                 text:
                                     "Android, PHP, Unity and Flutter developer. ",
                                 style: TextStyle(
-                                  fontFamily: "Comfortaa",
+                                  fontFamily: "Roboto",
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w900,
                                 ),
                               ),
                               TextSpan(
                                 text:
                                     "I am tech-enthsuast and always keen for sharing my knowledge to others. ",
                                 style: TextStyle(
-                                  fontFamily: "Comfortaa",
-                                  fontWeight: FontWeight.w900,
+                                  fontFamily: "Roboto",
                                 ),
                               ),
                               TextSpan(
                                 text:
                                     "Programming is my passion. Love android, flutter and creative designs.",
                                 style: TextStyle(
-                                  fontFamily: "Comfortaa",
-                                  fontWeight: FontWeight.w900,
+                                  fontFamily: "Roboto",
                                 ),
                               ),
                               TextSpan(
                                 text:
                                     "\nI am always looking for my weakness and thankful to those who teach, support and pray for me.\n",
                                 style: TextStyle(
-                                  fontFamily: "Comfortaa",
+                                  fontFamily: "Roboto",
                                   color: Colors.white,
                                 ),
                               ),
                             ],
                             style: TextStyle(
-                              fontFamily: "Comfortaa",
+                              fontFamily: "Roboto",
                               color: Colors.white54,
                               fontSize: isDesktop
-                                  ? Theme.of(context)
-                                      .textTheme
-                                      .headline
-                                      .fontSize
+                                  ? Theme.of(context).textTheme.title.fontSize
                                   : Theme.of(context).textTheme.title.fontSize,
-                              fontWeight:
-                                  Theme.of(context).textTheme.body2.fontWeight,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),

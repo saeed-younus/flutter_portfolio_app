@@ -33,11 +33,11 @@ class _SkillScreenState extends State<SkillScreen> {
             child: Text(
               "Skills",
               style: TextStyle(
-                fontFamily: "Comfortaa",
+                fontFamily: "Roboto",
                 fontSize: isDesktop
                     ? Theme.of(context).textTheme.display2.fontSize
                     : Theme.of(context).textTheme.display1.fontSize,
-                fontWeight: Theme.of(context).textTheme.display2.fontWeight,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
@@ -110,7 +110,7 @@ class SkillItem extends StatelessWidget {
             Text(
               _text,
               style: const TextStyle(
-                fontFamily: "OpenSans",
+                fontFamily: "Roboto",
                 fontSize: 20,
               ),
             ),

@@ -130,10 +130,11 @@ class _HomePageState extends State<HomePage> {
                               )
                             ]
                           : [],
-                      color: Theme.of(context).primaryColorDark,
+                      color: Color(0xFF383838),
                     ),
                     child: Material(
                       elevation: 0,
+                      color: Color(0xFF383838),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -242,7 +243,7 @@ class _HomePageState extends State<HomePage> {
     return [
       CircleButton(
         "Home",
-        materialColor: Colors.red,
+        materialColor: Colors.redAccent[100],
         shadowColor: Colors.redAccent,
         isSelected: _selectedPageIndex == 0,
         onPressed: () {
@@ -251,7 +252,7 @@ class _HomePageState extends State<HomePage> {
       ),
       CircleButton(
         "About Me",
-        materialColor: Colors.orange,
+        materialColor: Colors.orangeAccent[100],
         shadowColor: Colors.orangeAccent,
         isSelected: _selectedPageIndex == 1,
         onPressed: () {
@@ -260,7 +261,7 @@ class _HomePageState extends State<HomePage> {
       ),
       CircleButton(
         "Skills",
-        materialColor: Colors.yellow,
+        materialColor: Colors.yellowAccent[100],
         shadowColor: Colors.yellowAccent,
         isSelected: _selectedPageIndex == 2,
         onPressed: () {
@@ -269,7 +270,7 @@ class _HomePageState extends State<HomePage> {
       ),
       CircleButton(
         "Open Source",
-        materialColor: Colors.green,
+        materialColor: Colors.greenAccent[100],
         shadowColor: Colors.greenAccent,
         isSelected: _selectedPageIndex == 3,
         onPressed: () {
@@ -278,7 +279,7 @@ class _HomePageState extends State<HomePage> {
       ),
       CircleButton(
         "Demo",
-        materialColor: Colors.blue,
+        materialColor: Colors.blueAccent[100],
         shadowColor: Colors.blueAccent,
         isSelected: _selectedPageIndex == 4,
         onPressed: () {
@@ -287,7 +288,7 @@ class _HomePageState extends State<HomePage> {
       ),
       CircleButton(
         "Articles",
-        materialColor: Colors.indigo,
+        materialColor: Colors.indigoAccent[100],
         shadowColor: Colors.indigoAccent,
         isSelected: _selectedPageIndex == 5,
         onPressed: () {
@@ -296,7 +297,7 @@ class _HomePageState extends State<HomePage> {
       ),
       CircleButton(
         "Contact",
-        materialColor: Colors.deepPurple,
+        materialColor: Colors.deepPurpleAccent[100],
         shadowColor: Colors.deepPurpleAccent,
         isSelected: _selectedPageIndex == 6,
         onPressed: () {
@@ -398,6 +399,7 @@ class _CircleButtonState extends State<CircleButton> {
         child: Material(
           shape: CircleBorder(),
           elevation: 0,
+          color: Color(0xFF383838),
           child: Stack(
             children: <Widget>[
               AnimatedCrossFade(
@@ -418,15 +420,20 @@ class _CircleButtonState extends State<CircleButton> {
               ),
               InkWell(
                 onTap: widget.onPressed,
-                child: Center(
-                  child: Text(
-                    widget.text,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: widget.isSelected ? Colors.white : Colors.white54,
-                      fontFamily: "Comfortaa",
-                      fontSize: Theme.of(context).textTheme.body1.fontSize,
-                      fontWeight: FontWeight.w900,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text(
+                      widget.text,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: widget.isSelected
+                            ? Colors.black
+                            : Color(0xefffffff),
+                        fontFamily: "Roboto",
+                        fontSize: Theme.of(context).textTheme.body1.fontSize,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                 ),
