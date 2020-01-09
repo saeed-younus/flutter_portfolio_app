@@ -34,47 +34,50 @@ class _ArticleScreenState extends State<ArticleScreen> {
         children: <Widget>[
           Row(
             children: <Widget>[
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 64),
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      SizedBox(width: isDesktop ? 500 : 250),
-                      ArticleCardItem(
-                        "images/android_logo.png",
-                        "ViewModel with ViewModelProvider.Factory",
-                        "Why and when we use ViewModelProvider.Factory for ViewModel.",
-                        Colors.greenAccent,
-                        () {
-                          js.context.callMethod("open", [
-                            "https://medium.com/koderlabs/viewmodel-with-viewmodelprovider-factory-the-creator-of-viewmodel-8fabfec1aa4f"
-                          ]);
-                        },
-                      ),
-                      ArticleCardItem(
-                        "images/android_logo.png",
-                        "Motion Layout: Card Shuffle Animation",
-                        "In this article you will find how motion layout is easy and cool by creating card shuffle animation.",
-                        Colors.greenAccent,
-                        () {
-                          js.context.callMethod("open", [
-                            "https://medium.com/@sendtosaeed2/motion-layout-card-shuffle-animation-810e7978e8d0"
-                          ]);
-                        },
-                      ),
-                      ArticleCardItem(
-                        "images/flutter_icon.png",
-                        "Flutter: Material + Cupertino make together",
-                        "Run material widgets on Cupertino app or run cupertino widgets on Material App.",
-                        Colors.lightBlueAccent,
-                        () {
-                          js.context.callMethod("open", [
-                            "https://medium.com/@sendtosaeed2/flutter-material-cupertino-make-together-a3d2d7849548"
-                          ]);
-                        },
-                      ),
-                    ],
+              Flexible(
+                fit: FlexFit.tight,
+                child: Center(
+                  child: Container(
+                    height: 340,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        SizedBox(width: isDesktop ? 500 : 250),
+                        ArticleCardItem(
+                          "images/android_logo.png",
+                          "ViewModel with ViewModelProvider.Factory",
+                          "Why and when we use ViewModelProvider.Factory for ViewModel.",
+                          Colors.greenAccent,
+                          () {
+                            js.context.callMethod("open", [
+                              "https://medium.com/koderlabs/viewmodel-with-viewmodelprovider-factory-the-creator-of-viewmodel-8fabfec1aa4f"
+                            ]);
+                          },
+                        ),
+                        ArticleCardItem(
+                          "images/android_logo.png",
+                          "Motion Layout: Card Shuffle Animation",
+                          "In this article you will find how motion layout is easy and cool by creating card shuffle animation.",
+                          Colors.greenAccent,
+                          () {
+                            js.context.callMethod("open", [
+                              "https://medium.com/@sendtosaeed2/motion-layout-card-shuffle-animation-810e7978e8d0"
+                            ]);
+                          },
+                        ),
+                        ArticleCardItem(
+                          "images/flutter_icon.png",
+                          "Flutter: Material + Cupertino make together",
+                          "Run material widgets on Cupertino app or run cupertino widgets on Material App.",
+                          Colors.lightBlue[200],
+                          () {
+                            js.context.callMethod("open", [
+                              "https://medium.com/@sendtosaeed2/flutter-material-cupertino-make-together-a3d2d7849548"
+                            ]);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -115,11 +118,10 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 Text(
                   "Published \nArticles",
                   style: TextStyle(
-                    fontFamily: "Comfortaa",
+                    fontFamily: "Roboto",
                     fontSize: isDesktop
                         ? Theme.of(context).textTheme.display2.fontSize
                         : Theme.of(context).textTheme.display1.fontSize,
-                    fontWeight: FontWeight.w900,
                   ),
                 ),
               ],
@@ -156,10 +158,11 @@ class ArticleCardItem extends StatelessWidget {
       isDesktop = false;
     }
     return Container(
-      margin: const EdgeInsets.all(16),
       width: 320,
-      height: 300,
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
         child: InkWell(
           onTap: onTap,
           child: Padding(
@@ -174,28 +177,28 @@ class ArticleCardItem extends StatelessWidget {
                     image,
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
                 SizedBox(
                   height: 80,
                   child: Text(
                     title,
                     style: TextStyle(
                       color: titleColor,
-                      fontFamily: "Comfortaa",
+                      fontFamily: "Roboto",
                       fontSize: isDesktop
                           ? Theme.of(context).textTheme.headline.fontSize
                           : Theme.of(context).textTheme.title.fontSize,
-                      fontWeight:
-                          Theme.of(context).textTheme.headline.fontWeight,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 16),
                 Text(
                   description,
                   style: TextStyle(
-                    fontFamily: "Comfortaa",
-                    fontSize: isDesktop ? 18 : 16,
+                    fontFamily: "Roboto",
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ],

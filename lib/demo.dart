@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:web_portfolio/demo/RxListScreen.dart';
 import 'demo/Instagram.dart';
 import 'demo/WhatsApp.dart';
@@ -31,12 +30,12 @@ class _DemoScreenState extends State<DemoScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(24),
       child: Row(
         children: <Widget>[
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.only(right: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -48,13 +47,11 @@ class _DemoScreenState extends State<DemoScreen> {
                         TextSpan(
                           text: "Which is created in ",
                           style: TextStyle(
-                            fontFamily: "Comfortaa",
-                            color: Colors.white60,
+                            fontFamily: "Roboto",
+                            color: Colors.white70,
                             fontSize: isDesktop
                                 ? Theme.of(context).textTheme.display2.fontSize
                                 : Theme.of(context).textTheme.display1.fontSize,
-                            fontWeight:
-                                Theme.of(context).textTheme.display2.fontWeight,
                           ),
                         ),
                         TextSpan(
@@ -62,12 +59,11 @@ class _DemoScreenState extends State<DemoScreen> {
                         ),
                       ],
                       style: TextStyle(
-                        fontFamily: "Comfortaa",
+                        fontFamily: "Roboto",
                         color: Colors.white,
                         fontSize: isDesktop
                             ? Theme.of(context).textTheme.display2.fontSize
                             : Theme.of(context).textTheme.display1.fontSize,
-                        fontWeight: FontWeight.w900,
                       ),
                     ),
                   ),
@@ -86,12 +82,12 @@ class _DemoScreenState extends State<DemoScreen> {
           ),
           isDesktop
               ? AspectRatio(
-                  aspectRatio: 10 / 16,
+                  aspectRatio: 11 / 16,
                   child: Column(
                     children: <Widget>[
                       Container(
                         child: AspectRatio(
-                          aspectRatio: 10 / 16,
+                          aspectRatio: 11 / 16,
                           child: MaterialApp(
                             debugShowCheckedModeBanner: false,
                             theme: ThemeData.light(),
@@ -108,16 +104,16 @@ class _DemoScreenState extends State<DemoScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(left: 8),
+                  padding: const EdgeInsets.only(left: 24),
                   child: Text(
                     "You can run the demo by using common gestures. And change demo by clicking below buttons.",
                     style: TextStyle(
-                      fontFamily: "Comfortaa",
-                      color: Colors.white60,
+                      fontFamily: "Roboto",
+                      color: Colors.white,
                       fontSize: isDesktop
                           ? Theme.of(context).textTheme.headline.fontSize
                           : Theme.of(context).textTheme.title.fontSize,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -144,22 +140,18 @@ class _DemoScreenState extends State<DemoScreen> {
                     }
                   },
                   padding: const EdgeInsets.all(8),
-                  color: Colors.black54,
+                  color: _demoType == DemoEnum.whatsapp
+                      ? Colors.lightGreenAccent
+                      : Colors.white70,
                   child: Text(
                     "Whatsapp",
                     style: TextStyle(
-                      fontFamily: "Comfortaa",
-                      color: _demoType == DemoEnum.whatsapp
-                          ? Colors.lightGreenAccent
-                          : Colors.white70,
-                      fontSize: isDesktop
-                          ? Theme.of(context).textTheme.headline.fontSize
-                          : Theme.of(context).textTheme.title.fontSize,
-                      fontWeight: FontWeight.w900,
+                      fontFamily: "Roboto",
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
                 RaisedButton(
                   onPressed: () {
                     if (isDesktop) {
@@ -183,18 +175,15 @@ class _DemoScreenState extends State<DemoScreen> {
                     }
                   },
                   padding: const EdgeInsets.all(8),
-                  color: Colors.black54,
+                  color: _demoType == DemoEnum.instagram
+                      ? Colors.pinkAccent
+                      : Colors.white70,
                   child: Text(
                     "Instagram",
                     style: TextStyle(
-                      fontFamily: "Comfortaa",
-                      color: _demoType == DemoEnum.instagram
-                          ? Colors.pinkAccent
-                          : Colors.white70,
-                      fontSize: isDesktop
-                          ? Theme.of(context).textTheme.headline.fontSize
-                          : Theme.of(context).textTheme.title.fontSize,
-                      fontWeight: FontWeight.w900,
+                      fontFamily: "Roboto",
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
@@ -221,18 +210,15 @@ class _DemoScreenState extends State<DemoScreen> {
                     }
                   },
                   padding: const EdgeInsets.all(8),
-                  color: Colors.black54,
+                  color: _demoType == DemoEnum.todo
+                      ? Colors.blueAccent
+                      : Colors.white70,
                   child: Text(
                     "Todo List",
                     style: TextStyle(
-                      fontFamily: "Comfortaa",
-                      color: _demoType == DemoEnum.todo
-                          ? Colors.blueAccent
-                          : Colors.white70,
-                      fontSize: isDesktop
-                          ? Theme.of(context).textTheme.headline.fontSize
-                          : Theme.of(context).textTheme.title.fontSize,
-                      fontWeight: FontWeight.w900,
+                      fontFamily: "Roboto",
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),

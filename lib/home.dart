@@ -89,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen>
                 fontSize: Theme.of(context).textTheme.display2.fontSize,
                 fontWeight: FontWeight.w500,
               ),
+              textAlign: TextAlign.center,
             ),
             builder: (BuildContext context, Widget widget) {
               return Opacity(

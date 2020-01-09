@@ -93,7 +93,7 @@ class SkillItem extends StatelessWidget {
       isDesktop = false;
     }
     return Card(
-      elevation: 0,
+      elevation: 1,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -111,7 +111,9 @@ class SkillItem extends StatelessWidget {
               _text,
               style: const TextStyle(
                 fontFamily: "Roboto",
-                fontSize: 20,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
             ),
           ],

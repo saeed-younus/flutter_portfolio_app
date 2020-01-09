@@ -130,11 +130,10 @@ class _HomePageState extends State<HomePage> {
                               )
                             ]
                           : [],
-                      color: Color(0xFF383838),
+                      color: Color(0xFF444444),
                     ),
                     child: Material(
-                      elevation: 0,
-                      color: Color(0xFF383838),
+                      color: Color(0xFF444444),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -243,7 +242,7 @@ class _HomePageState extends State<HomePage> {
     return [
       CircleButton(
         "Home",
-        materialColor: Colors.redAccent[100],
+        materialColor: Colors.red[200],
         shadowColor: Colors.redAccent,
         isSelected: _selectedPageIndex == 0,
         onPressed: () {
@@ -252,7 +251,7 @@ class _HomePageState extends State<HomePage> {
       ),
       CircleButton(
         "About Me",
-        materialColor: Colors.orangeAccent[100],
+        materialColor: Colors.orange[200],
         shadowColor: Colors.orangeAccent,
         isSelected: _selectedPageIndex == 1,
         onPressed: () {
@@ -261,7 +260,7 @@ class _HomePageState extends State<HomePage> {
       ),
       CircleButton(
         "Skills",
-        materialColor: Colors.yellowAccent[100],
+        materialColor: Colors.yellow[200],
         shadowColor: Colors.yellowAccent,
         isSelected: _selectedPageIndex == 2,
         onPressed: () {
@@ -270,7 +269,7 @@ class _HomePageState extends State<HomePage> {
       ),
       CircleButton(
         "Open Source",
-        materialColor: Colors.greenAccent[100],
+        materialColor: Colors.green[200],
         shadowColor: Colors.greenAccent,
         isSelected: _selectedPageIndex == 3,
         onPressed: () {
@@ -279,7 +278,7 @@ class _HomePageState extends State<HomePage> {
       ),
       CircleButton(
         "Demo",
-        materialColor: Colors.blueAccent[100],
+        materialColor: Colors.blue[200],
         shadowColor: Colors.blueAccent,
         isSelected: _selectedPageIndex == 4,
         onPressed: () {
@@ -288,7 +287,7 @@ class _HomePageState extends State<HomePage> {
       ),
       CircleButton(
         "Articles",
-        materialColor: Colors.indigoAccent[100],
+        materialColor: Colors.indigo[200],
         shadowColor: Colors.indigoAccent,
         isSelected: _selectedPageIndex == 5,
         onPressed: () {
@@ -297,7 +296,7 @@ class _HomePageState extends State<HomePage> {
       ),
       CircleButton(
         "Contact",
-        materialColor: Colors.deepPurpleAccent[100],
+        materialColor: Colors.deepPurple[200],
         shadowColor: Colors.deepPurpleAccent,
         isSelected: _selectedPageIndex == 6,
         onPressed: () {
@@ -399,7 +398,7 @@ class _CircleButtonState extends State<CircleButton> {
         child: Material(
           shape: CircleBorder(),
           elevation: 0,
-          color: Color(0xFF383838),
+          color: Colors.transparent,
           child: Stack(
             children: <Widget>[
               AnimatedCrossFade(
@@ -432,7 +431,7 @@ class _CircleButtonState extends State<CircleButton> {
                             : Color(0xefffffff),
                         fontFamily: "Roboto",
                         fontSize: Theme.of(context).textTheme.body1.fontSize,
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),

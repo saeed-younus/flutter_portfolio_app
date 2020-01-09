@@ -32,16 +32,15 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
               "Open Source Projects",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontFamily: "Comfortaa",
+                fontFamily: "Roboto",
                 fontSize: isDesktop
                     ? Theme.of(context).textTheme.display2.fontSize
                     : Theme.of(context).textTheme.display1.fontSize,
-                fontWeight: Theme.of(context).textTheme.display2.fontWeight,
               ),
             ),
           ),
           Container(
-            constraints: BoxConstraints(minHeight: 250, maxHeight: 300),
+            constraints: BoxConstraints(minHeight: 250, maxHeight: 250),
             margin: EdgeInsets.all(16),
             child: ListView(
               scrollDirection: Axis.horizontal,
@@ -81,7 +80,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   "Flutter Project",
                   "Whats App Ui clone",
                   "In this project I just clone whats app UI in flutter and I explore flutter is so fast, rubust and easy.",
-                  Colors.lightBlueAccent,
+                  Colors.lightBlue[200],
                   () {
                     js.context.callMethod("open", [
                       "https://github.com/saeed-younus/whatsapp_clone_flutter"
@@ -92,7 +91,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   "Flutter Project",
                   "My Portfolio Web",
                   "You are running this web it is created in flutter. You can see the code in github.",
-                  Colors.lightBlueAccent,
+                  Colors.lightBlue[200],
                   () {
                     js.context.callMethod("open", [
                       "https://github.com/saeed-younus/flutter_portfolio_app"
@@ -108,7 +107,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
   }
 }
 
-class OpenSourceCardItem extends StatelessWidget {
+class OpenSourceCardItem extends StatefulWidget {
   String openSourceType;
   String title;
   String description;
@@ -124,13 +123,27 @@ class OpenSourceCardItem extends StatelessWidget {
   ) : super();
 
   @override
+  _OpenSourceCardItemState createState() => _OpenSourceCardItemState();
+}
+
+class _OpenSourceCardItemState extends State<OpenSourceCardItem> {
+  bool isHover = false;
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: 250,
       child: Card(
-        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
         child: InkWell(
-          onTap: onTap,
+          onTap: widget.onTap,
+          onHover: (isHover) {
+            setState(() {
+              this.isHover = isHover;
+            });
+          },
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -140,46 +153,49 @@ class OpenSourceCardItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      openSourceType,
+                      widget.openSourceType,
                       style: TextStyle(
-                        fontFamily: "Comfortaa",
-                        fontSize: Theme.of(context).textTheme.caption.fontSize,
-                        fontWeight:
-                            Theme.of(context).textTheme.caption.fontWeight,
-                      ),
+                          fontFamily: "Roboto",
+                          fontSize:
+                              Theme.of(context).textTheme.overline.fontSize,
+                          fontWeight: FontWeight.w600,
+                          color: widget.titleColor),
                     ),
                     SizedBox(
                       height: 24,
                       width: 24,
-                      child: const Icon(Icons.open_in_new),
+                      child: Icon(
+                        Icons.open_in_new,
+                        color: widget.titleColor,
+                      ),
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 24,
+                  height: 8,
                 ),
                 SizedBox(
                   height: 60,
                   child: Text(
-                    title,
+                    widget.title,
                     style: TextStyle(
-                      fontFamily: "Comfortaa",
-                      color: titleColor,
+                      fontFamily: "Roboto",
+                      color: widget.titleColor,
                       fontSize: Theme.of(context).textTheme.headline.fontSize,
-                      fontWeight:
-                          Theme.of(context).textTheme.headline.fontWeight,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 32,
+                  height: 16,
                 ),
                 Text(
-                  description,
+                  widget.description,
                   style: TextStyle(
-                    fontFamily: "Comfortaa",
-                    fontSize: Theme.of(context).textTheme.body2.fontSize,
-                    fontWeight: Theme.of(context).textTheme.body2.fontWeight,
+                    fontFamily: "Roboto",
+                    fontSize: Theme.of(context).textTheme.body1.fontSize,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
                   ),
                 ),
               ],

@@ -34,21 +34,20 @@ class _ContactScreenState extends State<ContactScreen> {
           Text(
             "Contact",
             style: TextStyle(
-              fontFamily: "Comfortaa",
+              fontFamily: "Roboto",
               fontSize: isDesktop
                   ? Theme.of(context).textTheme.display2.fontSize
                   : Theme.of(context).textTheme.display1.fontSize,
-              fontWeight: Theme.of(context).textTheme.display2.fontWeight,
             ),
           ),
           Text(
             "\nYou can contact me everywhere you wanted! I am active on all platform.",
             style: TextStyle(
-              fontFamily: "Comfortaa",
+              fontFamily: "Roboto",
               fontSize: isDesktop
                   ? Theme.of(context).textTheme.headline.fontSize
                   : Theme.of(context).textTheme.title.fontSize,
-              fontWeight: Theme.of(context).textTheme.headline.fontWeight,
+              fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: 16),
@@ -144,9 +143,9 @@ class ContactItem extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                fontFamily: "Comfortaa",
+                fontFamily: "Roboto",
                 fontSize: Theme.of(context).textTheme.body1.fontSize,
-                fontWeight: Theme.of(context).textTheme.body1.fontWeight,
+                fontWeight: FontWeight.w700,
               ),
             ),
           ],
