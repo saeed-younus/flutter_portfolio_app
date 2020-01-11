@@ -131,6 +131,9 @@ class ContactItem extends StatelessWidget {
       width: 100,
       child: InkWell(
         onTap: onTap,
+        hoverColor: Colors.black12,
+        highlightColor: Colors.black38,
+        splashColor: Colors.black54,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

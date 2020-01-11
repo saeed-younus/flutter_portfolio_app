@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen>
             children: <Widget>[
               Expanded(
                 child: Opacity(
-                  opacity: 0.75,
+                  opacity: 0,
                   child: Image.asset(
                     "images/about_2.jpg",
                     fit: BoxFit.cover,
@@ -79,31 +79,31 @@ class _HomeScreenState extends State<HomeScreen>
               ),
             ],
           ),
-          AnimatedBuilder(
-            animation: _controller,
-            child: Text(
-              "Hey!! This is Muhammad Saeed",
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: "Roboto",
-                fontSize: Theme.of(context).textTheme.display2.fontSize,
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            builder: (BuildContext context, Widget widget) {
-              return Opacity(
-                opacity: _controller.value,
-                child: Align(
-                  alignment: Alignment(
-                    0,
-                    0.4 - (0.1 * _controller.value),
-                  ),
-                  child: widget,
-                ),
-              );
-            },
-          ),
+          // AnimatedBuilder(
+          //   animation: _controller,
+          //   child: Text(
+          //     "Hey!! This is Muhammad Saeed",
+          //     style: TextStyle(
+          //       color: Colors.white,
+          //       fontFamily: "Roboto",
+          //       fontSize: Theme.of(context).textTheme.display2.fontSize,
+          //       fontWeight: FontWeight.w500,
+          //     ),
+          //     textAlign: TextAlign.center,
+          //   ),
+          //   builder: (BuildContext context, Widget widget) {
+          //     return Opacity(
+          //       opacity: _controller.value,
+          //       child: Align(
+          //         alignment: Alignment(
+          //           0,
+          //           0.4 - (0.1 * _controller.value),
+          //         ),
+          //         child: widget,
+          //       ),
+          //     );
+          //   },
+          // ),
         ],
       ),
     );
