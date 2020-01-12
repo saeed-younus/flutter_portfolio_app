@@ -75,10 +75,13 @@ class _HomePageState extends State<HomePage> {
   double currentPageValue = 0;
 
   Color _backgroundColor = Colors.red;
-  bool _headerShadow = false;
+  bool _showHeaderColor = false;
+
+  double pageOffset = 0;
 
   bool isDesktop = true;
   Size size;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   @override
   void initState() {
@@ -106,21 +109,20 @@ class _HomePageState extends State<HomePage> {
     _pageController.addListener(offsetPageCallback);
 
     return Scaffold(
-      appBar: isDesktop
-          ? null
-          : AppBar(
-              title: getTitle(),
-              centerTitle: true,
-            ),
+      key: _scaffoldKey,
       drawer: isDesktop
           ? null
           : Drawer(
               child: Container(
-                margin: EdgeInsets.only(top: 64),
                 child: ListView(
                   children: <Widget>[
                     Column(
-                      children: getMenuItems(),
+                      children: [
+                        SizedBox(height: 64),
+                        getTitle(),
+                        SizedBox(height: 32),
+                        ...getMenuItems(),
+                      ],
                     ),
                   ],
                 ),
@@ -133,28 +135,40 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Expanded(
-                  child: Opacity(
-                    opacity: 0.75,
-                    child: Image.asset(
-                      "images/about_2.jpg",
-                      fit: BoxFit.cover,
-                      filterQuality: FilterQuality.low,
-                      alignment: const Alignment(0, -0.25),
+                  child: Transform(
+                    transform: Matrix4.identity()
+                      ..scale(1 + (pageOffset / (size.height * 2)))
+                      ..translate(0, 0 + pageOffset / 8),
+                    origin: Offset(size.width / 2, size.height / 2),
+                    child: Opacity(
+                      opacity: 0.75,
+                      child: Image.asset(
+                        "images/about_2.jpg",
+                        fit: BoxFit.cover,
+                        filterQuality: FilterQuality.low,
+                        alignment: Alignment(0, 0),
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
-            Center(
-              child: Text(
-                "Hey!! This is Muhammad Saeed",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "Roboto",
-                  fontSize: Theme.of(context).textTheme.display2.fontSize,
-                  fontWeight: FontWeight.w500,
+            Transform(
+              transform: Matrix4.identity()
+                ..scale(1 + (pageOffset / (size.height * 2)))
+                ..translate(0, 0 - pageOffset / 8),
+              origin: Offset(size.width / 2, size.height / 2),
+              child: Center(
+                child: Text(
+                  "Hey!! This is Muhammad Saeed",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "Roboto",
+                    fontSize: Theme.of(context).textTheme.display2.fontSize,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ),
             // AnimatedBuilder(
@@ -185,39 +199,6 @@ class _HomePageState extends State<HomePage> {
             Column(
               children: <Widget>[
                 //App Bar
-                isDesktop
-                    ? AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
-                        curve: Curves.ease,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          boxShadow: _headerShadow
-                              ? [
-                                  BoxShadow(
-                                    blurRadius: 5,
-                                    offset: Offset(0, 5),
-                                    color: Colors.black26,
-                                  )
-                                ]
-                              : [],
-                          color: Color(0xFF444444),
-                        ),
-                        child: Material(
-                          color: Color(0xFF444444),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              getTitle(),
-                              Container(
-                                child: Row(
-                                  children: getMenuItems(),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    : const SizedBox(),
                 Expanded(
                   child: AnimatedContainer(
                     duration: Duration(
@@ -265,6 +246,41 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
+            isDesktop
+                ? AnimatedContainer(
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.ease,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: _showHeaderColor
+                          ? Color(0xFF444444)
+                          : Color(0x00444444),
+                    ),
+                    child: Material(
+                      color: Color(0x00444444),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          getTitle(),
+                          Container(
+                            child: Row(
+                              children: getMenuItems(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : SizedBox(
+                    child: IconButton(
+                      icon: Icon(Icons.menu),
+                      onPressed: () {
+                        setState(() {
+                          _scaffoldKey.currentState.openDrawer();
+                        });
+                      },
+                    ),
+                  ),
           ],
         ),
       ),
@@ -404,10 +420,11 @@ class _HomePageState extends State<HomePage> {
   void offsetPageCallback() {
     var offset = _pageController.offset;
     setState(() {
-      if (offset == 0) {
-        _headerShadow = false;
+      if (offset <= size.height) {
+        pageOffset = offset;
+        _showHeaderColor = false;
       } else {
-        _headerShadow = true;
+        _showHeaderColor = true;
       }
     });
   }
@@ -493,16 +510,19 @@ class _CircleButtonState extends State<CircleButton> {
         color: Colors.transparent,
         child: Stack(
           children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 300),
-                  width: widget.isSelected ? 100 : 0,
-                  height: 2,
-                  color: Colors.transparent,
-                ),
-              ],
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 400),
+                    width: widget.isSelected ? 88 : 0,
+                    alignment: Alignment(0, 0),
+                    height: 2,
+                    color: Colors.black54,
+                  ),
+                ],
+              ),
             ),
             InkWell(
               onTap: widget.onPressed,
@@ -522,9 +542,6 @@ class _CircleButtonState extends State<CircleButton> {
                       color:
                           widget.isSelected ? Colors.black : Color(0xefffffff),
                       fontFamily: "Roboto",
-                      decoration: widget.isSelected
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
                       fontSize: Theme.of(context).textTheme.body1.fontSize,
                       fontWeight: FontWeight.w700,
                     ),
