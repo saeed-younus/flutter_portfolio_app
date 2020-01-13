@@ -41,31 +41,83 @@ class _SkillScreenState extends State<SkillScreen> {
               ),
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: ListView(
-                children: <Widget>[
-                  Wrap(
-                    alignment: WrapAlignment.center,
-                    children: <Widget>[
-                      SkillItem("images/android_logo.png", "Android"),
-                      SkillItem("images/flutter_icon.png", "Flutter"),
-                      SkillItem("images/kotlin_logo.png", " Kotlin"),
-                      SkillItem("images/dart_logo.png.", "Dart"),
-                      SkillItem("images/java_logo.png", "Java"),
-                      SkillItem("images/flare_logo.png", "Flare"),
-                      SkillItem("images/firebase_logo.png", "Firebase"),
-                      SkillItem("images/ml_kit_logo.png", "ML Kit"),
-                      SkillItem("images/dialogflow_logo.png", "Dialogflow"),
-                      SkillItem("images/unity_logo.png", "Unity"),
-                      SkillItem("images/3ds_max_logo.png", "3ds Max"),
-                      SkillItem("images/php_logo.png", "php"),
-                      SkillItem("images/mysql_logo.png", "MySql"),
-                    ],
-                  ),
-                ],
-              ),
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              children: <Widget>[
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  runSpacing: 4,
+                  spacing: 4,
+                  children: <Widget>[
+                    SkillItem(
+                      "images/android_logo.png",
+                      "Android",
+                      Color.fromRGBO(200, 255, 200, 1),
+                    ),
+                    SkillItem(
+                      "images/flutter_icon.png",
+                      "Flutter",
+                      Color.fromRGBO(200, 235, 255, 1),
+                    ),
+                    SkillItem(
+                      "images/kotlin_logo.png",
+                      " Kotlin",
+                      Color.fromRGBO(255, 230, 200, 1),
+                    ),
+                    SkillItem(
+                      "images/dart_logo.png.",
+                      "Dart",
+                      Color.fromRGBO(200, 235, 255, 1),
+                    ),
+                    SkillItem(
+                      "images/java_logo.png",
+                      "Java",
+                      Color.fromRGBO(255, 220, 220, 1),
+                    ),
+                    SkillItem(
+                      "images/flare_logo.png",
+                      "Flare",
+                      Color.fromRGBO(250, 220, 250, 1),
+                    ),
+                    SkillItem(
+                      "images/firebase_logo.png",
+                      "Firebase",
+                      Color.fromRGBO(255, 255, 200, 1),
+                    ),
+                    SkillItem(
+                      "images/ml_kit_logo.png",
+                      "ML Kit",
+                      Color.fromRGBO(200, 220, 255, 1),
+                    ),
+                    SkillItem(
+                      "images/dialogflow_logo.png",
+                      "Dialogflow",
+                      Color.fromRGBO(250, 225, 200, 1),
+                    ),
+                    SkillItem(
+                      "images/unity_logo.png",
+                      "Unity",
+                      Color.fromRGBO(230, 230, 230, 1),
+                    ),
+                    SkillItem(
+                      "images/3ds_max_logo.png",
+                      "3ds Max",
+                      Color.fromRGBO(220, 230, 220, 1),
+                    ),
+                    SkillItem(
+                      "images/php_logo.png",
+                      "php",
+                      Color.fromRGBO(200, 210, 245, 1),
+                    ),
+                    SkillItem(
+                      "images/mysql_logo.png",
+                      "MySql",
+                      Color.fromRGBO(255, 240, 200, 1),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],
@@ -77,11 +129,9 @@ class _SkillScreenState extends State<SkillScreen> {
 class SkillItem extends StatelessWidget {
   final String _imageAssetName;
   final String _text;
+  final Color _cardColor;
 
-  SkillItem(
-    this._imageAssetName,
-    this._text,
-  ) : super();
+  SkillItem(this._imageAssetName, this._text, this._cardColor) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +143,11 @@ class SkillItem extends StatelessWidget {
       isDesktop = false;
     }
     return Card(
-      elevation: 1,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      color: _cardColor,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -109,11 +163,11 @@ class SkillItem extends StatelessWidget {
             ),
             Text(
               _text,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: "Roboto",
+                color: Colors.black,
                 fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
+                fontWeight: FontWeight.w700,
               ),
             ),
           ],

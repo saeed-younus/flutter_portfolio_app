@@ -47,7 +47,8 @@ class _ArticleScreenState extends State<ArticleScreen> {
                           "images/android_logo.png",
                           "ViewModel with ViewModelProvider.Factory",
                           "Why and when we use ViewModelProvider.Factory for ViewModel.",
-                          Colors.greenAccent,
+                          Colors.green[900],
+                          Color.fromRGBO(230, 255, 230, 1),
                           () {
                             js.context.callMethod("open", [
                               "https://medium.com/koderlabs/viewmodel-with-viewmodelprovider-factory-the-creator-of-viewmodel-8fabfec1aa4f"
@@ -58,7 +59,8 @@ class _ArticleScreenState extends State<ArticleScreen> {
                           "images/android_logo.png",
                           "Motion Layout: Card Shuffle Animation",
                           "In this article you will find how motion layout is easy and cool by creating card shuffle animation.",
-                          Colors.greenAccent,
+                          Colors.green[900],
+                          Color.fromRGBO(230, 255, 230, 1),
                           () {
                             js.context.callMethod("open", [
                               "https://medium.com/@sendtosaeed2/motion-layout-card-shuffle-animation-810e7978e8d0"
@@ -69,7 +71,8 @@ class _ArticleScreenState extends State<ArticleScreen> {
                           "images/flutter_icon.png",
                           "Flutter: Material + Cupertino make together",
                           "Run material widgets on Cupertino app or run cupertino widgets on Material App.",
-                          Colors.lightBlue[200],
+                          Colors.blue[900],
+                          Color.fromRGBO(210, 240, 255, 1),
                           () {
                             js.context.callMethod("open", [
                               "https://medium.com/@sendtosaeed2/flutter-material-cupertino-make-together-a3d2d7849548"
@@ -138,6 +141,7 @@ class ArticleCardItem extends StatelessWidget {
   String title;
   String description;
   Color titleColor;
+  Color cardColor;
   VoidCallback onTap;
 
   ArticleCardItem(
@@ -145,6 +149,7 @@ class ArticleCardItem extends StatelessWidget {
     this.title,
     this.description,
     this.titleColor,
+    this.cardColor,
     this.onTap,
   ) : super();
 
@@ -161,9 +166,14 @@ class ArticleCardItem extends StatelessWidget {
       width: 320,
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(16),
         ),
+        elevation: 0,
+        color: cardColor,
         child: InkWell(
+          hoverColor: Colors.white12,
+          highlightColor: Colors.white24,
+          splashColor: Colors.white38,
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -197,6 +207,7 @@ class ArticleCardItem extends StatelessWidget {
                   description,
                   style: TextStyle(
                     fontFamily: "Roboto",
+                    color: Colors.black,
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),

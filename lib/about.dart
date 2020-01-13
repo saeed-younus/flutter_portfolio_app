@@ -48,7 +48,7 @@ class _AboutScreenState extends State<AboutScreen>
           isDesktop
               ? Expanded(
                   child: Opacity(
-                    opacity: 0.3,
+                    opacity: 0.8,
                     child: Image.asset(
                       "images/about_1.jpg",
                       fit: BoxFit.cover,
@@ -89,12 +89,13 @@ class _AboutScreenState extends State<AboutScreen>
                                     "Android, PHP, Unity and Flutter developer. ",
                                 style: TextStyle(
                                   fontFamily: "Roboto",
-                                  color: Colors.white,
+                                  color:
+                                      Theme.of(context).textTheme.title.color,
                                 ),
                               ),
                               TextSpan(
                                 text:
-                                    "I am tech-enthsuast and always keen for sharing my knowledge to others. ",
+                                    "I am tech-enthusiast and always keen for sharing my knowledge to others. ",
                                 style: TextStyle(
                                   fontFamily: "Roboto",
                                 ),
@@ -111,25 +112,27 @@ class _AboutScreenState extends State<AboutScreen>
                                     "\nI am always looking for my weakness and thankful to those who teach, support and pray for me.\n",
                                 style: TextStyle(
                                   fontFamily: "Roboto",
-                                  color: Colors.white,
+                                  color:
+                                      Theme.of(context).textTheme.title.color,
                                 ),
                               ),
                             ],
                             style: TextStyle(
                               fontFamily: "Roboto",
-                              color: Colors.white54,
+                              color: Theme.of(context).textTheme.caption.color,
                               fontSize: isDesktop
                                   ? Theme.of(context).textTheme.title.fontSize
                                   : Theme.of(context).textTheme.title.fontSize,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                         ),
                         isDesktop
                             ? SizedBox()
-                            : Expanded(
+                            : Container(
+                                margin: EdgeInsets.only(top: 16),
                                 child: Opacity(
-                                  opacity: 0.3,
+                                  opacity: 0.8,
                                   child: Image.asset(
                                     "images/about_1.jpg",
                                     fit: BoxFit.cover,

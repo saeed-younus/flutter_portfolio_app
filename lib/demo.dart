@@ -48,7 +48,7 @@ class _DemoScreenState extends State<DemoScreen> {
                           text: "Which is created in ",
                           style: TextStyle(
                             fontFamily: "Roboto",
-                            color: Colors.white70,
+                            color: Theme.of(context).textTheme.caption.color,
                             fontSize: isDesktop
                                 ? Theme.of(context).textTheme.display2.fontSize
                                 : Theme.of(context).textTheme.display1.fontSize,
@@ -60,7 +60,7 @@ class _DemoScreenState extends State<DemoScreen> {
                       ],
                       style: TextStyle(
                         fontFamily: "Roboto",
-                        color: Colors.white,
+                        color: Theme.of(context).textTheme.title.color,
                         fontSize: isDesktop
                             ? Theme.of(context).textTheme.display2.fontSize
                             : Theme.of(context).textTheme.display1.fontSize,
@@ -109,15 +109,15 @@ class _DemoScreenState extends State<DemoScreen> {
                     "You can run the demo by using common gestures. And change demo by clicking below buttons.",
                     style: TextStyle(
                       fontFamily: "Roboto",
-                      color: Colors.white,
+                      color: Theme.of(context).textTheme.title.color,
                       fontSize: isDesktop
                           ? Theme.of(context).textTheme.headline.fontSize
                           : Theme.of(context).textTheme.title.fontSize,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                RaisedButton(
+                FlatButton(
                   onPressed: () {
                     if (isDesktop) {
                       setState(() {
@@ -141,18 +141,21 @@ class _DemoScreenState extends State<DemoScreen> {
                   },
                   padding: const EdgeInsets.all(8),
                   color: _demoType == DemoEnum.whatsapp
-                      ? Colors.lightGreenAccent
+                      ? Color.fromRGBO(200, 250, 200, 1)
                       : Colors.white70,
+                  highlightColor: Color.fromRGBO(230, 255, 230, 0.5),
+                  hoverColor: Color.fromRGBO(230, 255, 230, 0.75),
+                  splashColor: Color.fromRGBO(230, 255, 230, 0.9),
                   child: Text(
                     "Whatsapp",
                     style: TextStyle(
                       fontFamily: "Roboto",
-                      color: Colors.black,
+                      color: Colors.green[900],
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                RaisedButton(
+                FlatButton(
                   onPressed: () {
                     if (isDesktop) {
                       setState(() {
@@ -176,18 +179,21 @@ class _DemoScreenState extends State<DemoScreen> {
                   },
                   padding: const EdgeInsets.all(8),
                   color: _demoType == DemoEnum.instagram
-                      ? Colors.pinkAccent
+                      ? Color.fromRGBO(255, 210, 210, 1)
                       : Colors.white70,
+                  highlightColor: Color.fromRGBO(255, 230, 230, 0.5),
+                  hoverColor: Color.fromRGBO(255, 230, 230, 0.75),
+                  splashColor: Color.fromRGBO(255, 230, 230, 0.9),
                   child: Text(
                     "Instagram",
                     style: TextStyle(
                       fontFamily: "Roboto",
-                      color: Colors.black,
+                      color: Colors.pink[900],
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                RaisedButton(
+                FlatButton(
                   onPressed: () {
                     if (isDesktop) {
                       setState(() {
@@ -211,13 +217,16 @@ class _DemoScreenState extends State<DemoScreen> {
                   },
                   padding: const EdgeInsets.all(8),
                   color: _demoType == DemoEnum.todo
-                      ? Colors.blueAccent
+                      ? Color.fromRGBO(200, 220, 255, 1)
                       : Colors.white70,
+                  highlightColor: Color.fromRGBO(210, 235, 255, 0.5),
+                  hoverColor: Color.fromRGBO(210, 235, 255, 0.75),
+                  splashColor: Color.fromRGBO(210, 235, 255, 0.9),
                   child: Text(
                     "Todo List",
                     style: TextStyle(
                       fontFamily: "Roboto",
-                      color: Colors.black,
+                      color: Colors.blue[900],
                       fontWeight: FontWeight.w700,
                     ),
                   ),

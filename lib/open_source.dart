@@ -49,7 +49,8 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   "Android Library",
                   "Finite Coverflow",
                   "It is an android library which is used to create beautiful snapping animation for your Viewpager2.",
-                  Colors.greenAccent,
+                  Colors.green[900],
+                  Color.fromRGBO(230, 255, 230, 1),
                   () {
                     js.context.callMethod("open",
                         ["https://github.com/KoderLabs/finite-cover-flow"]);
@@ -59,7 +60,8 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   "Android Library",
                   "Overlay Service",
                   "It is an android library which is used to create custom overlay just like PIP(Picture and picture) and it also have lower than 27 api support.",
-                  Colors.greenAccent,
+                  Colors.green[900],
+                  Color.fromRGBO(230, 255, 230, 1),
                   () {
                     js.context.callMethod("open",
                         ["https://github.com/KoderLabs/overlay-service"]);
@@ -69,7 +71,8 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   "Android Example Code",
                   "Motion Layout Examples",
                   "In this project you can explore amazing animation which was created in motion layout.",
-                  Colors.greenAccent,
+                  Colors.green[900],
+                  Color.fromRGBO(230, 255, 230, 1),
                   () {
                     js.context.callMethod("open", [
                       "https://github.com/saeed-younus/motion-layout-examples"
@@ -80,7 +83,8 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   "Flutter Project",
                   "Whats App Ui clone",
                   "In this project I just clone whats app UI in flutter and I explore flutter is so fast, rubust and easy.",
-                  Colors.lightBlue[200],
+                  Colors.blue[900],
+                  Color.fromRGBO(220, 245, 255, 1),
                   () {
                     js.context.callMethod("open", [
                       "https://github.com/saeed-younus/whatsapp_clone_flutter"
@@ -91,7 +95,8 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
                   "Flutter Project",
                   "My Portfolio Web",
                   "You are running this web it is created in flutter. You can see the code in github.",
-                  Colors.lightBlue[200],
+                  Colors.blue[900],
+                  Color.fromRGBO(220, 245, 255, 1),
                   () {
                     js.context.callMethod("open", [
                       "https://github.com/saeed-younus/flutter_portfolio_app"
@@ -112,6 +117,7 @@ class OpenSourceCardItem extends StatefulWidget {
   String title;
   String description;
   Color titleColor;
+  Color cardColor;
   VoidCallback onTap;
 
   OpenSourceCardItem(
@@ -119,6 +125,7 @@ class OpenSourceCardItem extends StatefulWidget {
     this.title,
     this.description,
     this.titleColor,
+    this.cardColor,
     this.onTap,
   ) : super();
 
@@ -134,10 +141,15 @@ class _OpenSourceCardItemState extends State<OpenSourceCardItem> {
     return Container(
       width: 250,
       child: Card(
+        elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(16),
         ),
+        color: widget.cardColor,
         child: InkWell(
+          hoverColor: Colors.white24,
+          highlightColor: Colors.white38,
+          splashColor: Colors.white54,
           onTap: widget.onTap,
           onHover: (isHover) {
             setState(() {
@@ -194,8 +206,8 @@ class _OpenSourceCardItemState extends State<OpenSourceCardItem> {
                   style: TextStyle(
                     fontFamily: "Roboto",
                     fontSize: Theme.of(context).textTheme.body1.fontSize,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
                   ),
                 ),
               ],

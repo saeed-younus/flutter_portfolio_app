@@ -9,7 +9,7 @@ import 'skills.dart';
 import 'dart:core';
 import 'dart:math';
 
-void main() => runApp(MyApp());
+void main() => runApp(AppDataWidget(child: MyApp()));
 
 class MyApp extends StatefulWidget {
   @override
@@ -17,50 +17,76 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isDarkTheme = true;
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Saeed Younus',
-      theme: isDarkTheme ? ThemeData.dark() : ThemeData.light(),
-      debugShowCheckedModeBanner: false,
-      home: Stack(
-        children: [
-          HomePage(),
-          // Align(
-          //   alignment: Alignment(-1, 1),
-          //   child: Column(
-          //     children: <Widget>[
-          //       FloatingActionButton(
-          //         onPressed: () {
-          //           setState(() {
-          //             isDarkTheme = true;
-          //           });
-          //         },
-          //         backgroundColor: Colors.black,
-          //         splashColor: Colors.grey,
-          //         child: Icon(
-          //           Icons.format_color_fill,
-          //           color: Colors.white,
-          //         ),
-          //       ),
-          //       FloatingActionButton(
-          //         onPressed: () {
-          //           setState(() {
-          //             isDarkTheme = false;
-          //           });
-          //         },
-          //         splashColor: Colors.grey,
-          //         backgroundColor: Colors.white,
-          //         child: Icon(Icons.format_color_fill),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-        ],
-      ),
+    return ValueListenableBuilder(
+      valueListenable: AppDataWidget.of(context).isDarkTheme,
+      builder: (BuildContext context, bool isDark, Widget child) {
+        return MaterialApp(
+          title: 'Saeed Younus',
+          theme: isDark
+              ? ThemeData(
+                  brightness: Brightness.dark,
+                  primaryColor: Color(0xff222222),
+                )
+              : ThemeData(
+                  brightness: Brightness.light,
+                  primaryColor: Color(0xfffefefe),
+                ),
+          debugShowCheckedModeBanner: false,
+          home: Stack(
+            children: [
+              HomePage(),
+              // Align(
+              //   alignment: Alignment(-1, 1),
+              //   child: Column(
+              //     children: <Widget>[
+              //       FloatingActionButton(
+              //         onPressed: () {
+              //           setState(() {
+              //             isDarkTheme = true;
+              //           });
+              //         },
+              //         backgroundColor: Colors.black,
+              //         splashColor: Colors.grey,
+              //         child: Icon(
+              //           Icons.format_color_fill,
+              //           color: Colors.white,
+              //         ),
+              //       ),
+              //       FloatingActionButton(
+              //         onPressed: () {
+              //           setState(() {
+              //             isDarkTheme = false;
+              //           });
+              //         },
+              //         splashColor: Colors.grey,
+              //         backgroundColor: Colors.white,
+              //         child: Icon(Icons.format_color_fill),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+            ],
+          ),
+        );
+      },
     );
+  }
+}
+
+class AppDataWidget extends InheritedWidget {
+  ValueNotifier<bool> isDarkTheme = ValueNotifier(false);
+
+  AppDataWidget({@required Widget child}) : super(child: child);
+
+  @override
+  bool updateShouldNotify(AppDataWidget oldWidget) {
+    return isDarkTheme != oldWidget.isDarkTheme;
+  }
+
+  static AppDataWidget of(BuildContext context) {
+    return (context.dependOnInheritedWidgetOfExactType<AppDataWidget>());
   }
 }
 
@@ -72,7 +98,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var _selectedPageIndex = 0;
   var _pageController = PageController();
+  var _scrollController = ScrollController();
   double currentPageValue = 0;
+
+  double scrollOffset = 0;
 
   Color _backgroundColor = Colors.red;
   bool _showHeaderColor = false;
@@ -83,12 +112,61 @@ class _HomePageState extends State<HomePage> {
   Size size;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
+  GlobalKey contactKey = GlobalKey();
+  GlobalKey skillKey = GlobalKey();
+  GlobalKey articleKey = GlobalKey();
+  GlobalKey openSourceKey = GlobalKey();
+  GlobalKey demoKey = GlobalKey();
+
   @override
   void initState() {
     super.initState();
     _pageController.addListener(() {
       setState(() {
         currentPageValue = _pageController.page;
+      });
+    });
+    _scrollController.addListener(() {
+      setState(() {
+        scrollOffset = _scrollController.offset;
+        pageOffset = scrollOffset;
+        if (scrollOffset >= size.height - 60) {
+          _showHeaderColor = true;
+        } else {
+          _showHeaderColor = false;
+        }
+
+        if ((contactKey.currentContext.findRenderObject() as RenderBox)
+                .localToGlobal(Offset.zero)
+                .dy <=
+            size.height / 2) {
+          _selectedPageIndex = 6;
+        } else if ((articleKey.currentContext.findRenderObject() as RenderBox)
+                .localToGlobal(Offset.zero)
+                .dy <=
+            size.height / 2) {
+          _selectedPageIndex = 5;
+        } else if ((demoKey.currentContext.findRenderObject() as RenderBox)
+                .localToGlobal(Offset.zero)
+                .dy <=
+            size.height / 2) {
+          _selectedPageIndex = 4;
+        } else if ((openSourceKey.currentContext.findRenderObject()
+                    as RenderBox)
+                .localToGlobal(Offset.zero)
+                .dy <=
+            size.height / 2) {
+          _selectedPageIndex = 3;
+        } else if ((skillKey.currentContext.findRenderObject() as RenderBox)
+                .localToGlobal(Offset.zero)
+                .dy <=
+            size.height / 2) {
+          _selectedPageIndex = 2;
+        } else if (scrollOffset >= size.height / 2) {
+          _selectedPageIndex = 1;
+        } else {
+          _selectedPageIndex = 0;
+        }
       });
     });
   }
@@ -141,7 +219,7 @@ class _HomePageState extends State<HomePage> {
                       ..translate(0, 0 + pageOffset / 8),
                     origin: Offset(size.width / 2, size.height / 2),
                     child: Opacity(
-                      opacity: 0.75,
+                      opacity: 1,
                       child: Image.asset(
                         "images/about_2.jpg",
                         fit: BoxFit.cover,
@@ -162,7 +240,6 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   "Hey!! This is Muhammad Saeed",
                   style: TextStyle(
-                    color: Colors.white,
                     fontFamily: "Roboto",
                     fontSize: Theme.of(context).textTheme.display2.fontSize,
                     fontWeight: FontWeight.w500,
@@ -196,52 +273,101 @@ class _HomePageState extends State<HomePage> {
             //     );
             //   },
             // ),
-            Column(
-              children: <Widget>[
-                //App Bar
-                Expanded(
-                  child: AnimatedContainer(
-                    duration: Duration(
-                      milliseconds: 400,
-                    ),
-                    child: PageView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: 7,
-                      pageSnapping: false,
-                      itemBuilder: (context, index) {
-                        // if (index == currentPageValue.floor()) {
-                        //   print("floor() $index and $currentPageValue");
-                        //   return Transform(
-                        //     transform: Matrix4.identity()
-                        //       ..translate(0,
-                        //           (currentPageValue - index) * (size.height - 80))
-                        //       ..scale(
-                        //         ((currentPageValue - index) + 1).abs(),
-                        //       ),
-                        //     alignment: Alignment(0, 0),
-                        //     child: getPage(index),
-                        //   );
-                        // } else if (index == currentPageValue.floor() + 1) {
-                        //   print("(floor() + 1) $index and $currentPageValue");
-                        //   return Transform(
-                        //     transform: Matrix4.identity()..translate(0, 0),
-                        //     alignment: Alignment(0, 1),
-                        //     child: getPage(index),
-                        //   );
-                        // } else {
-                        //   print("() $index and $currentPageValue");
-                        //   return getPage(index);
-                        // }
-                        return getPage(index);
-                      },
-                      controller: _pageController,
-                      physics: BouncingScrollPhysics(),
-                      onPageChanged: (index) {
-                        setState(() {
-                          _selectedPageIndex = index;
-                        });
-                      },
-                    ),
+            // Column(
+            //   children: <Widget>[
+            //     Expanded(
+            //       child: PageView.builder(
+            //         scrollDirection: Axis.vertical,
+            //         itemCount: 7,
+            //         pageSnapping: false,
+            //         itemBuilder: (context, index) {
+            //           // if (index == currentPageValue.floor()) {
+            //           //   print("floor() $index and $currentPageValue");
+            //           //   return Transform(
+            //           //     transform: Matrix4.identity()
+            //           //       ..translate(0,
+            //           //           (currentPageValue - index) * (size.height - 80))
+            //           //       ..scale(
+            //           //         ((currentPageValue - index) + 1).abs(),
+            //           //       ),
+            //           //     alignment: Alignment(0, 0),
+            //           //     child: getPage(index),
+            //           //   );
+            //           // } else if (index == currentPageValue.floor() + 1) {
+            //           //   print("(floor() + 1) $index and $currentPageValue");
+            //           //   return Transform(
+            //           //     transform: Matrix4.identity()..translate(0, 0),
+            //           //     alignment: Alignment(0, 1),
+            //           //     child: getPage(index),
+            //           //   );
+            //           // } else {
+            //           //   print("() $index and $currentPageValue");
+            //           //   return getPage(index);
+            //           // }
+            //           return getPage(index);
+            //         },
+            //         controller: _pageController,
+            //         physics: BouncingScrollPhysics(),
+            //         onPageChanged: (index) {
+            //           setState(() {
+            //             _selectedPageIndex = index;
+            //           });
+            //         },
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            CustomScrollView(
+              controller: _scrollController,
+              slivers: <Widget>[
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: size.height,
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    color: Theme.of(context).canvasColor,
+                    child: AboutScreen(),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    key: skillKey,
+                    color: Theme.of(context).canvasColor,
+                    child: SkillScreen(),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    key: openSourceKey,
+                    color: Theme.of(context).canvasColor,
+                    height: size.height,
+                    child: OpenSourceScreen(),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    key: demoKey,
+                    height: size.height,
+                    color: Theme.of(context).canvasColor,
+                    child: DemoScreen(),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    key: articleKey,
+                    height: size.height,
+                    color: Theme.of(context).canvasColor,
+                    child: ArticleScreen(),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    key: contactKey,
+                    constraints: BoxConstraints(minHeight: size.height),
+                    color: Theme.of(context).canvasColor,
+                    child: ContactScreen(),
                   ),
                 ),
               ],
@@ -253,7 +379,7 @@ class _HomePageState extends State<HomePage> {
                     height: 60,
                     decoration: BoxDecoration(
                       color: _showHeaderColor
-                          ? Color(0xFF444444)
+                          ? Theme.of(context).primaryColor
                           : Color(0x00444444),
                     ),
                     child: Material(
@@ -295,7 +421,7 @@ class _HomePageState extends State<HomePage> {
       child: RichText(
         text: TextSpan(
           style: TextStyle(
-            color: Theme.of(context).primaryTextTheme.body1.color,
+            color: Theme.of(context).textTheme.body1.color,
           ),
           children: [
             TextSpan(
@@ -357,7 +483,15 @@ class _HomePageState extends State<HomePage> {
         shadowColor: Colors.redAccent,
         isSelected: _selectedPageIndex == 0,
         onPressed: () {
-          _selectPage(0, Colors.red[900]);
+          _scrollController.animateTo(
+            0,
+            duration: Duration(milliseconds: 700),
+            curve: Curves.ease,
+          );
+          if (!isDesktop) {
+            Navigator.of(context).pop();
+          }
+          // _selectPage(0, Colors.red[900]);
         },
       ),
       CircleButton(
@@ -366,7 +500,15 @@ class _HomePageState extends State<HomePage> {
         shadowColor: Colors.orangeAccent,
         isSelected: _selectedPageIndex == 1,
         onPressed: () {
-          _selectPage(1, Colors.orange[900]);
+          _scrollController.animateTo(
+            isDesktop ? size.height - 60 : size.height,
+            duration: Duration(milliseconds: 700),
+            curve: Curves.ease,
+          );
+          if (!isDesktop) {
+            Navigator.of(context).pop();
+          }
+          // _selectPage(1, Colors.orange[900]);
         },
       ),
       CircleButton(
@@ -375,7 +517,18 @@ class _HomePageState extends State<HomePage> {
         shadowColor: Colors.yellowAccent,
         isSelected: _selectedPageIndex == 2,
         onPressed: () {
-          _selectPage(2, Colors.yellow[900]);
+          _scrollController.animateTo(
+            (skillKey.currentContext.findRenderObject() as RenderBox)
+                    .localToGlobal(Offset(0, _scrollController.offset))
+                    .dy -
+                (isDesktop ? 60 : 0),
+            duration: Duration(milliseconds: 700),
+            curve: Curves.ease,
+          );
+          if (!isDesktop) {
+            Navigator.of(context).pop();
+          }
+          // _selectPage(2, Colors.yellow[900]);
         },
       ),
       CircleButton(
@@ -384,7 +537,18 @@ class _HomePageState extends State<HomePage> {
         shadowColor: Colors.greenAccent,
         isSelected: _selectedPageIndex == 3,
         onPressed: () {
-          _selectPage(3, Colors.green[900]);
+          _scrollController.animateTo(
+            (openSourceKey.currentContext.findRenderObject() as RenderBox)
+                    .localToGlobal(Offset(0, _scrollController.offset))
+                    .dy -
+                (isDesktop ? 60 : 0),
+            duration: Duration(milliseconds: 700),
+            curve: Curves.ease,
+          );
+          if (!isDesktop) {
+            Navigator.of(context).pop();
+          }
+          // _selectPage(3, Colors.green[900]);
         },
       ),
       CircleButton(
@@ -393,7 +557,18 @@ class _HomePageState extends State<HomePage> {
         shadowColor: Colors.blueAccent,
         isSelected: _selectedPageIndex == 4,
         onPressed: () {
-          _selectPage(4, Colors.blue[900]);
+          _scrollController.animateTo(
+            (demoKey.currentContext.findRenderObject() as RenderBox)
+                    .localToGlobal(Offset(0, _scrollController.offset))
+                    .dy -
+                (isDesktop ? 60 : 0),
+            duration: Duration(milliseconds: 700),
+            curve: Curves.ease,
+          );
+          if (!isDesktop) {
+            Navigator.of(context).pop();
+          }
+          // _selectPage(4, Colors.blue[900]);
         },
       ),
       CircleButton(
@@ -402,7 +577,19 @@ class _HomePageState extends State<HomePage> {
         shadowColor: Colors.indigoAccent,
         isSelected: _selectedPageIndex == 5,
         onPressed: () {
-          _selectPage(5, Colors.indigo[900]);
+          _scrollController.animateTo(
+            (articleKey.currentContext.findRenderObject() as RenderBox)
+                    .localToGlobal(Offset(0, _scrollController.offset))
+                    .dy -
+                (isDesktop ? 60 : 0),
+            duration: Duration(milliseconds: 700),
+            curve: Curves.ease,
+          );
+
+          if (!isDesktop) {
+            Navigator.of(context).pop();
+          }
+          // _selectPage(5, Colors.indigo[900]);
         },
       ),
       CircleButton(
@@ -411,7 +598,19 @@ class _HomePageState extends State<HomePage> {
         shadowColor: Colors.deepPurpleAccent,
         isSelected: _selectedPageIndex == 6,
         onPressed: () {
-          _selectPage(6, Colors.deepPurple[900]);
+          _scrollController.animateTo(
+            (contactKey.currentContext.findRenderObject() as RenderBox)
+                    .localToGlobal(Offset(0, _scrollController.offset))
+                    .dy -
+                (isDesktop ? 60 : 0),
+            duration: Duration(milliseconds: 700),
+            curve: Curves.ease,
+          );
+
+          if (!isDesktop) {
+            Navigator.of(context).pop();
+          }
+          // _selectPage(6, Colors.deepPurple[900]);
         },
       ),
     ];
@@ -539,8 +738,7 @@ class _CircleButtonState extends State<CircleButton> {
                       textAlign: TextAlign.center,
                     ),
                     style: TextStyle(
-                      color:
-                          widget.isSelected ? Colors.black : Color(0xefffffff),
+                      color: Theme.of(context).textTheme.title.color,
                       fontFamily: "Roboto",
                       fontSize: Theme.of(context).textTheme.body1.fontSize,
                       fontWeight: FontWeight.w700,
