@@ -62,7 +62,7 @@ class _SkillScreenState extends State<SkillScreen> {
                     ),
                     SkillItem(
                       "images/kotlin_logo.png",
-                      " Kotlin",
+                      "Kotlin",
                       Color.fromRGBO(255, 230, 200, 1),
                     ),
                     SkillItem(
