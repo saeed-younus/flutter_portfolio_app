@@ -121,52 +121,63 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _pageController.addListener(() {
-      setState(() {
-        currentPageValue = _pageController.page;
-      });
-    });
     _scrollController.addListener(() {
       setState(() {
         scrollOffset = _scrollController.offset;
-        pageOffset = scrollOffset;
         if (scrollOffset >= size.height - 60) {
           _showHeaderColor = true;
         } else {
+          // pageOffset = scrollOffset;
           _showHeaderColor = false;
         }
 
-        if ((contactKey.currentContext.findRenderObject() as RenderBox)
-                .localToGlobal(Offset.zero)
-                .dy <=
-            size.height / 2) {
-          _selectedPageIndex = 6;
-        } else if ((articleKey.currentContext.findRenderObject() as RenderBox)
-                .localToGlobal(Offset.zero)
-                .dy <=
-            size.height / 2) {
-          _selectedPageIndex = 5;
-        } else if ((demoKey.currentContext.findRenderObject() as RenderBox)
-                .localToGlobal(Offset.zero)
-                .dy <=
-            size.height / 2) {
-          _selectedPageIndex = 4;
-        } else if ((openSourceKey.currentContext.findRenderObject()
-                    as RenderBox)
-                .localToGlobal(Offset.zero)
-                .dy <=
-            size.height / 2) {
-          _selectedPageIndex = 3;
-        } else if ((skillKey.currentContext.findRenderObject() as RenderBox)
-                .localToGlobal(Offset.zero)
-                .dy <=
-            size.height / 2) {
-          _selectedPageIndex = 2;
-        } else if (scrollOffset >= size.height / 2) {
-          _selectedPageIndex = 1;
-        } else {
+        if (scrollOffset < size.height / 2) {
           _selectedPageIndex = 0;
+        } else if (scrollOffset < (size.height) + size.height / 2) {
+          _selectedPageIndex = 1;
+        } else if (scrollOffset < (size.height * 2) + size.height / 2) {
+          _selectedPageIndex = 2;
+        } else if (scrollOffset < (size.height * 3) + size.height / 2) {
+          _selectedPageIndex = 3;
+        } else if (scrollOffset < (size.height * 4) + size.height / 2) {
+          _selectedPageIndex = 4;
+        } else if (scrollOffset < (size.height * 5) + size.height / 2) {
+          _selectedPageIndex = 5;
+        } else if (scrollOffset < (size.height * 6) + size.height / 2) {
+          _selectedPageIndex = 6;
         }
+
+        // if ((contactKey.currentContext.findRenderObject() as RenderBox)
+        //         .localToGlobal(Offset.zero)
+        //         .dy <=
+        //     size.height / 2) {
+        //   _selectedPageIndex = 6;
+        // } else if ((articleKey.currentContext.findRenderObject() as RenderBox)
+        //         .localToGlobal(Offset.zero)
+        //         .dy <=
+        //     size.height / 2) {
+        //   _selectedPageIndex = 5;
+        // } else if ((demoKey.currentContext.findRenderObject() as RenderBox)
+        //         .localToGlobal(Offset.zero)
+        //         .dy <=
+        //     size.height / 2) {
+        //   _selectedPageIndex = 4;
+        // } else if ((openSourceKey.currentContext.findRenderObject()
+        //             as RenderBox)
+        //         .localToGlobal(Offset.zero)
+        //         .dy <=
+        //     size.height / 2) {
+        //   _selectedPageIndex = 3;
+        // } else if ((skillKey.currentContext.findRenderObject() as RenderBox)
+        //         .localToGlobal(Offset.zero)
+        //         .dy <=
+        //     size.height / 2) {
+        //   _selectedPageIndex = 2;
+        // } else if (scrollOffset >= size.height / 2) {
+        //   _selectedPageIndex = 1;
+        // } else {
+        //   _selectedPageIndex = 0;
+        // }
       });
     });
   }
@@ -320,55 +331,45 @@ class _HomePageState extends State<HomePage> {
             CustomScrollView(
               controller: _scrollController,
               slivers: <Widget>[
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: size.height,
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Container(
-                    color: Theme.of(context).canvasColor,
-                    child: AboutScreen(),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Container(
-                    key: skillKey,
-                    color: Theme.of(context).canvasColor,
-                    child: SkillScreen(),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Container(
-                    key: openSourceKey,
-                    color: Theme.of(context).canvasColor,
-                    height: size.height,
-                    child: OpenSourceScreen(),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Container(
-                    key: demoKey,
-                    height: size.height,
-                    color: Theme.of(context).canvasColor,
-                    child: DemoScreen(),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Container(
-                    key: articleKey,
-                    height: size.height,
-                    color: Theme.of(context).canvasColor,
-                    child: ArticleScreen(),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Container(
-                    key: contactKey,
-                    constraints: BoxConstraints(minHeight: size.height),
-                    color: Theme.of(context).canvasColor,
-                    child: ContactScreen(),
-                  ),
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    SizedBox(
+                      height: size.height,
+                    ),
+                    Container(
+                      color: Theme.of(context).canvasColor,
+                      child: AboutScreen(),
+                    ),
+                    Container(
+                      key: skillKey,
+                      color: Theme.of(context).canvasColor,
+                      child: SkillScreen(),
+                    ),
+                    Container(
+                      key: openSourceKey,
+                      color: Theme.of(context).canvasColor,
+                      height: size.height,
+                      child: OpenSourceScreen(),
+                    ),
+                    Container(
+                      key: demoKey,
+                      height: size.height,
+                      color: Theme.of(context).canvasColor,
+                      child: DemoScreen(),
+                    ),
+                    Container(
+                      key: articleKey,
+                      height: size.height,
+                      color: Theme.of(context).canvasColor,
+                      child: ArticleScreen(),
+                    ),
+                    Container(
+                      key: contactKey,
+                      constraints: BoxConstraints(minHeight: size.height),
+                      color: Theme.of(context).canvasColor,
+                      child: ContactScreen(),
+                    ),
+                  ]),
                 ),
               ],
             ),
@@ -518,10 +519,7 @@ class _HomePageState extends State<HomePage> {
         isSelected: _selectedPageIndex == 2,
         onPressed: () {
           _scrollController.animateTo(
-            (skillKey.currentContext.findRenderObject() as RenderBox)
-                    .localToGlobal(Offset(0, _scrollController.offset))
-                    .dy -
-                (isDesktop ? 60 : 0),
+            size.height * 2 + 200 - (isDesktop ? 60 : 0),
             duration: Duration(milliseconds: 700),
             curve: Curves.ease,
           );
@@ -538,10 +536,7 @@ class _HomePageState extends State<HomePage> {
         isSelected: _selectedPageIndex == 3,
         onPressed: () {
           _scrollController.animateTo(
-            (openSourceKey.currentContext.findRenderObject() as RenderBox)
-                    .localToGlobal(Offset(0, _scrollController.offset))
-                    .dy -
-                (isDesktop ? 60 : 0),
+            size.height * 3 + 200 - (isDesktop ? 60 : 0),
             duration: Duration(milliseconds: 700),
             curve: Curves.ease,
           );
@@ -558,10 +553,7 @@ class _HomePageState extends State<HomePage> {
         isSelected: _selectedPageIndex == 4,
         onPressed: () {
           _scrollController.animateTo(
-            (demoKey.currentContext.findRenderObject() as RenderBox)
-                    .localToGlobal(Offset(0, _scrollController.offset))
-                    .dy -
-                (isDesktop ? 60 : 0),
+            size.height * 4 + 200 - (isDesktop ? 60 : 0),
             duration: Duration(milliseconds: 700),
             curve: Curves.ease,
           );
@@ -578,10 +570,7 @@ class _HomePageState extends State<HomePage> {
         isSelected: _selectedPageIndex == 5,
         onPressed: () {
           _scrollController.animateTo(
-            (articleKey.currentContext.findRenderObject() as RenderBox)
-                    .localToGlobal(Offset(0, _scrollController.offset))
-                    .dy -
-                (isDesktop ? 60 : 0),
+            size.height * 5 + 200 - (isDesktop ? 60 : 0),
             duration: Duration(milliseconds: 700),
             curve: Curves.ease,
           );
@@ -599,10 +588,7 @@ class _HomePageState extends State<HomePage> {
         isSelected: _selectedPageIndex == 6,
         onPressed: () {
           _scrollController.animateTo(
-            (contactKey.currentContext.findRenderObject() as RenderBox)
-                    .localToGlobal(Offset(0, _scrollController.offset))
-                    .dy -
-                (isDesktop ? 60 : 0),
+            size.height * 6 + 200 - (isDesktop ? 60 : 0),
             duration: Duration(milliseconds: 700),
             curve: Curves.ease,
           );
