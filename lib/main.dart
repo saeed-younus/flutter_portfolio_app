@@ -1,4 +1,11 @@
+import 'dart:core';
+import 'dart:math';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:web_portfolio/newMain.dart';
+
 import 'about.dart';
 import 'article.dart';
 import 'contact.dart';
@@ -6,88 +13,180 @@ import 'demo.dart';
 import 'home.dart';
 import 'open_source.dart';
 import 'skills.dart';
-import 'dart:core';
-import 'dart:math';
 
-void main() => runApp(AppDataWidget(child: MyApp()));
+void main() => runApp(
+      AppDataWidget(
+        child:  EntryScreen(),
+      ),
+    );
 
-class MyApp extends StatefulWidget {
+//class MyApp extends StatefulWidget {
+//  @override
+//  _MyAppState createState() => _MyAppState();
+//}
+//
+//class _MyAppState extends State<MyApp> {
+//  @override
+//  Widget build(BuildContext context) {
+//    return ValueListenableBuilder(
+//      valueListenable: AppDataWidget.of(context).isDarkTheme,
+//      builder: (BuildContext context, bool isDark, Widget child) {
+//        return MaterialApp(
+//          title: 'Saeed Younus',
+//          theme: isDark
+//              ? ThemeData(
+//                  brightness: Brightness.dark,
+//                  primaryColor: Color(0xff222222),
+//                )
+//              : ThemeData(
+//                  brightness: Brightness.light,
+//                  primaryColor: Color(0xfffefefe),
+//                ),
+//          debugShowCheckedModeBanner: false,
+//          home: Stack(
+//            children: [
+//              HomePage(),
+//              // Align(
+//              //   alignment: Alignment(-1, 1),
+//              //   child: Column(
+//              //     children: <Widget>[
+//              //       FloatingActionButton(
+//              //         onPressed: () {
+//              //           setState(() {
+//              //             isDarkTheme = true;
+//              //           });
+//              //         },
+//              //         backgroundColor: Colors.black,
+//              //         splashColor: Colors.grey,
+//              //         child: Icon(
+//              //           Icons.format_color_fill,
+//              //           color: Colors.white,
+//              //         ),
+//              //       ),
+//              //       FloatingActionButton(
+//              //         onPressed: () {
+//              //           setState(() {
+//              //             isDarkTheme = false;
+//              //           });
+//              //         },
+//              //         splashColor: Colors.grey,
+//              //         backgroundColor: Colors.white,
+//              //         child: Icon(Icons.format_color_fill),
+//              //       ),
+//              //     ],
+//              //   ),
+//              // ),
+//            ],
+//          ),
+//        );
+//      },
+//    );
+//  }
+//}
+
+//class AppDataWidget extends InheritedWidget {
+//  ValueNotifier<bool> isDarkTheme = ValueNotifier(false);
+//
+//  AppDataWidget({@required Widget child}) : super(child: child);
+//
+//  @override
+//  bool updateShouldNotify(AppDataWidget oldWidget) {
+//    return isDarkTheme != oldWidget.isDarkTheme;
+//  }
+//
+//  static AppDataWidget of(BuildContext context) {
+//    return (context.dependOnInheritedWidgetOfExactType<AppDataWidget>());
+//  }
+//}
+
+class CustomScrollPhysics extends ScrollPhysics {
+  CustomScrollPhysics({ScrollPhysics parent}) : super(parent: parent);
+
   @override
-  _MyAppState createState() => _MyAppState();
-}
+  ClampingScrollPhysics applyTo(ScrollPhysics ancestor) {
+    return ClampingScrollPhysics(parent: buildParent(ancestor));
+  }
 
-class _MyAppState extends State<MyApp> {
   @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: AppDataWidget.of(context).isDarkTheme,
-      builder: (BuildContext context, bool isDark, Widget child) {
-        return MaterialApp(
-          title: 'Saeed Younus',
-          theme: isDark
-              ? ThemeData(
-                  brightness: Brightness.dark,
-                  primaryColor: Color(0xff222222),
-                )
-              : ThemeData(
-                  brightness: Brightness.light,
-                  primaryColor: Color(0xfffefefe),
-                ),
-          debugShowCheckedModeBanner: false,
-          home: Stack(
-            children: [
-              HomePage(),
-              // Align(
-              //   alignment: Alignment(-1, 1),
-              //   child: Column(
-              //     children: <Widget>[
-              //       FloatingActionButton(
-              //         onPressed: () {
-              //           setState(() {
-              //             isDarkTheme = true;
-              //           });
-              //         },
-              //         backgroundColor: Colors.black,
-              //         splashColor: Colors.grey,
-              //         child: Icon(
-              //           Icons.format_color_fill,
-              //           color: Colors.white,
-              //         ),
-              //       ),
-              //       FloatingActionButton(
-              //         onPressed: () {
-              //           setState(() {
-              //             isDarkTheme = false;
-              //           });
-              //         },
-              //         splashColor: Colors.grey,
-              //         backgroundColor: Colors.white,
-              //         child: Icon(Icons.format_color_fill),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-            ],
-          ),
-        );
-      },
+  double applyBoundaryConditions(ScrollMetrics position, double value) {
+    assert(() {
+      if (value == position.pixels) {
+        throw FlutterError.fromParts(<DiagnosticsNode>[
+          ErrorSummary(
+              '$runtimeType.applyBoundaryConditions() was called redundantly.'),
+          ErrorDescription(
+              'The proposed new position, $value, is exactly equal to the current position of the '
+              'given ${position.runtimeType}, ${position.pixels}.\n'
+              'The applyBoundaryConditions method should only be called when the value is '
+              'going to actually change the pixels, otherwise it is redundant.'),
+          DiagnosticsProperty<ScrollPhysics>(
+              'The physics object in question was', this,
+              style: DiagnosticsTreeStyle.errorProperty),
+          DiagnosticsProperty<ScrollMetrics>(
+              'The position object in question was', position,
+              style: DiagnosticsTreeStyle.errorProperty)
+        ]);
+      }
+      return true;
+    }());
+    if (value < position.pixels &&
+        position.pixels <= position.minScrollExtent) // underscroll
+      return value - position.pixels;
+    if (position.maxScrollExtent <= position.pixels &&
+        position.pixels < value) // overscroll
+      return value - position.pixels;
+    if (value < position.minScrollExtent &&
+        position.minScrollExtent < position.pixels) // hit top edge
+      return value - position.minScrollExtent;
+    if (position.pixels < position.maxScrollExtent &&
+        position.maxScrollExtent < value) // hit bottom edge
+      return value - position.maxScrollExtent;
+    return 0.0;
+  }
+
+  @override
+  Simulation createBallisticSimulation(
+      ScrollMetrics position, double velocity) {
+    debugPrint("object");
+    final Tolerance tolerance = this.tolerance;
+    if (position.outOfRange) {
+      double end;
+      if (position.pixels > position.maxScrollExtent)
+        end = position.maxScrollExtent;
+      if (position.pixels < position.minScrollExtent)
+        end = position.minScrollExtent;
+      assert(end != null);
+      debugPrint("Spring");
+      return ScrollSpringSimulation(
+        spring,
+        position.pixels,
+        end,
+        min(0.0, velocity),
+        tolerance: tolerance,
+      );
+    }
+    if (velocity.abs() < tolerance.velocity) return null;
+    if (velocity > 0.0 && position.pixels >= position.maxScrollExtent)
+      return null;
+    if (velocity < 0.0 && position.pixels <= position.minScrollExtent)
+      return null;
+    debugPrint("Clamp");
+    return ClampingScrollSimulation(
+      position: position.pixels,
+      velocity: velocity * 0.1,
+      tolerance: tolerance,
+      friction: 0.6,
     );
   }
-}
-
-class AppDataWidget extends InheritedWidget {
-  ValueNotifier<bool> isDarkTheme = ValueNotifier(false);
-
-  AppDataWidget({@required Widget child}) : super(child: child);
 
   @override
-  bool updateShouldNotify(AppDataWidget oldWidget) {
-    return isDarkTheme != oldWidget.isDarkTheme;
-  }
+  double get minFlingVelocity => 0;
 
-  static AppDataWidget of(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType<AppDataWidget>());
-  }
+  @override
+  double get maxFlingVelocity => 0;
+
+  @override
+  double get minFlingDistance => 0;
 }
 
 class HomePage extends StatefulWidget {
@@ -117,6 +216,8 @@ class _HomePageState extends State<HomePage> {
   GlobalKey articleKey = GlobalKey();
   GlobalKey openSourceKey = GlobalKey();
   GlobalKey demoKey = GlobalKey();
+
+  CustomScrollPhysics _physics = CustomScrollPhysics();
 
   @override
   void initState() {
@@ -328,50 +429,83 @@ class _HomePageState extends State<HomePage> {
             //     ),
             //   ],
             // ),
-            CustomScrollView(
-              controller: _scrollController,
-              slivers: <Widget>[
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    SizedBox(
-                      height: size.height,
+            Listener(
+              onPointerSignal: (PointerSignalEvent details) {
+                if (details is PointerScrollEvent) {
+                  print("PointerSignalEvent ${details.scrollDelta}");
+                  if (details.scrollDelta.dy >= 1.5) {
+                    _scrollController.animateTo(size.height,
+                        duration: Duration(milliseconds: 700),
+                        curve: Curves.easeInOut);
+                  } else if (details.scrollDelta.dy <= -1.5) {
+                    _scrollController.animateTo(0,
+                        duration: Duration(milliseconds: 700),
+                        curve: Curves.easeInOut);
+                  }
+                }
+              },
+              child: GestureDetector(
+                onVerticalDragUpdate: (DragUpdateDetails details) {
+                  print("Drag down ${details.delta}");
+                  if (details.delta.dy < -2) {
+                    _scrollController.animateTo(size.height,
+                        duration: Duration(milliseconds: 700),
+                        curve: Curves.easeInOut);
+                  } else if (details.delta.dy > 2) {
+                    _scrollController.animateTo(0,
+                        duration: Duration(milliseconds: 700),
+                        curve: Curves.easeInOut);
+                  }
+                },
+                child: CustomScrollView(
+                  controller: _scrollController,
+                  physics: NeverScrollableScrollPhysics(),
+                  slivers: <Widget>[
+                    SliverList(
+                      delegate: SliverChildListDelegate([
+                        SizedBox(
+                          height: size.height,
+                        ),
+                        Container(
+                          height: size.height,
+                          color: Theme.of(context).canvasColor,
+                          child: AboutScreen(),
+                        ),
+                        Container(
+                          key: skillKey,
+                          color: Theme.of(context).canvasColor,
+                          child: SkillScreen(),
+                        ),
+                        Container(
+                          key: openSourceKey,
+                          color: Theme.of(context).canvasColor,
+                          height: size.height,
+                          child: OpenSourceScreen(),
+                        ),
+                        Container(
+                          key: demoKey,
+                          height: size.height,
+                          color: Theme.of(context).canvasColor,
+                          child: DemoScreen(),
+                        ),
+                        Container(
+                          key: articleKey,
+                          height: size.height,
+                          color: Theme.of(context).canvasColor,
+                          child: ArticleScreen(),
+                        ),
+                        Container(
+                          key: contactKey,
+                          height: size.height,
+                          constraints: BoxConstraints(minHeight: size.height),
+                          color: Theme.of(context).canvasColor,
+                          child: ContactScreen(),
+                        ),
+                      ]),
                     ),
-                    Container(
-                      color: Theme.of(context).canvasColor,
-                      child: AboutScreen(),
-                    ),
-                    Container(
-                      key: skillKey,
-                      color: Theme.of(context).canvasColor,
-                      child: SkillScreen(),
-                    ),
-                    Container(
-                      key: openSourceKey,
-                      color: Theme.of(context).canvasColor,
-                      height: size.height,
-                      child: OpenSourceScreen(),
-                    ),
-                    Container(
-                      key: demoKey,
-                      height: size.height,
-                      color: Theme.of(context).canvasColor,
-                      child: DemoScreen(),
-                    ),
-                    Container(
-                      key: articleKey,
-                      height: size.height,
-                      color: Theme.of(context).canvasColor,
-                      child: ArticleScreen(),
-                    ),
-                    Container(
-                      key: contactKey,
-                      constraints: BoxConstraints(minHeight: size.height),
-                      color: Theme.of(context).canvasColor,
-                      child: ContactScreen(),
-                    ),
-                  ]),
+                  ],
                 ),
-              ],
+              ),
             ),
             isDesktop
                 ? AnimatedContainer(
@@ -412,6 +546,11 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  ScrollPhysics getPhysics() {
+    print("object45674");
+    return _physics;
   }
 
   Widget getTitle() {

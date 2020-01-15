@@ -41,6 +41,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                     height: 340,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
+                      physics: BouncingScrollPhysics(),
                       children: <Widget>[
                         SizedBox(width: isDesktop ? 500 : 250),
                         ArticleCardItem(

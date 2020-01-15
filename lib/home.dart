@@ -8,15 +8,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+    with TickerProviderStateMixin {
+  AnimationController _fadeAnimationController;
 
   bool isDesktop = true;
+  Size size;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    var size = MediaQuery.of(context).size;
+    size = MediaQuery.of(context).size;
     if (size.width > size.height) {
       isDesktop = true;
     } else {
@@ -27,21 +28,23 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: Duration(milliseconds: 1000),
+    _fadeAnimationController = AnimationController(
+      duration: Duration(milliseconds: 300),
       vsync: this,
     );
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _fadeAnimationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    _controller.forward();
+    Future.delayed(Duration(milliseconds: 1000), () {
+      _fadeAnimationController.forward();
+    });
     return Container(
       child: Stack(
         children: <Widget>[
@@ -49,61 +52,40 @@ class _HomeScreenState extends State<HomeScreen>
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Expanded(
-                child: Opacity(
-                  opacity: 0,
-                  child: Image.asset(
-                    "images/about_2.jpg",
-                    fit: BoxFit.cover,
-                    filterQuality: FilterQuality.low,
-                    alignment: const Alignment(0, -0.25),
-                  ),
+                child: Image.asset(
+                  "images/about_2.jpg",
+                  fit: BoxFit.cover,
+                  filterQuality: FilterQuality.low,
+                  alignment: const Alignment(0, -0.25),
                 ),
               ),
             ],
           ),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Theme.of(context).canvasColor,
-                        Colors.transparent,
-                      ],
-                      begin: Alignment(0, 1),
-                      end: Alignment(0, 0),
-                    ),
-                  ),
-                ),
+          AnimatedBuilder(
+            animation: _fadeAnimationController,
+            child: Text(
+              "Hey!! This is Muhammad Saeed",
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: "Roboto",
+                fontSize: Theme.of(context).textTheme.display2.fontSize,
+                fontWeight: FontWeight.w500,
               ),
-            ],
+              textAlign: TextAlign.center,
+            ),
+            builder: (BuildContext context, Widget widget) {
+              return Opacity(
+                opacity: _fadeAnimationController.value,
+                child: Align(
+                  alignment: Alignment(
+                    0,
+                    0.4 - (0.1 * _fadeAnimationController.value),
+                  ),
+                  child: widget,
+                ),
+              );
+            },
           ),
-          // AnimatedBuilder(
-          //   animation: _controller,
-          //   child: Text(
-          //     "Hey!! This is Muhammad Saeed",
-          //     style: TextStyle(
-          //       color: Colors.white,
-          //       fontFamily: "Roboto",
-          //       fontSize: Theme.of(context).textTheme.display2.fontSize,
-          //       fontWeight: FontWeight.w500,
-          //     ),
-          //     textAlign: TextAlign.center,
-          //   ),
-          //   builder: (BuildContext context, Widget widget) {
-          //     return Opacity(
-          //       opacity: _controller.value,
-          //       child: Align(
-          //         alignment: Alignment(
-          //           0,
-          //           0.4 - (0.1 * _controller.value),
-          //         ),
-          //         child: widget,
-          //       ),
-          //     );
-          //   },
-          // ),
         ],
       ),
     );

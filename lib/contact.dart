@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'dart:js' as js;
-
-import 'package:web_portfolio/main.dart';
+import 'package:web_portfolio/newMain.dart';
 
 class ContactScreen extends StatefulWidget {
   @override
@@ -32,7 +31,7 @@ class _ContactScreenState extends State<ContactScreen> {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: <Widget>[
-          const SizedBox(height: 50),
+          Expanded(child: SizedBox()),
           Text(
             "Contact",
             style: TextStyle(
@@ -107,60 +106,7 @@ class _ContactScreenState extends State<ContactScreen> {
               ),
             ],
           ),
-          SizedBox(
-            height: 64,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                width: 50,
-                height: 50,
-                child: Material(
-                  shape: CircleBorder(
-                    side: BorderSide(
-                      color: Colors.black,
-                      width: 2,
-                    ),
-                  ),
-                  color: Colors.white,
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        AppDataWidget.of(context).isDarkTheme.value = false;
-                      });
-                    },
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 16,
-              ),
-              SizedBox(
-                width: 50,
-                height: 50,
-                child: Material(
-                  shape: CircleBorder(
-                    side: BorderSide(
-                      color: Colors.white,
-                      width: 2,
-                    ),
-                  ),
-                  color: Colors.black,
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        AppDataWidget.of(context).isDarkTheme.value = true;
-                      });
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 64,
-          ),
+          Expanded(child: SizedBox()),
         ],
       ),
     );

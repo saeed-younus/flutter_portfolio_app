@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:js' as js;
+
+import 'package:flutter/material.dart';
 
 class OpenSourceScreen extends StatefulWidget {
   @override
@@ -24,7 +25,7 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(top: 32.0),
@@ -39,11 +40,15 @@ class _OpenSourceScreenState extends State<OpenSourceScreen> {
               ),
             ),
           ),
+          SizedBox(
+            height: 32,
+          ),
           Container(
             constraints: BoxConstraints(minHeight: 250, maxHeight: 250),
             margin: EdgeInsets.all(16),
             child: ListView(
               scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
               children: <Widget>[
                 OpenSourceCardItem(
                   "Android Library",

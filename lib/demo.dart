@@ -30,7 +30,7 @@ class _DemoScreenState extends State<DemoScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.only(top:70, right:24,left:24, bottom: 24),
       child: Row(
         children: <Widget>[
           Expanded(
