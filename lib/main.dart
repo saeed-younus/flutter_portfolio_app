@@ -16,7 +16,7 @@ import 'skills.dart';
 
 void main() => runApp(
       AppDataWidget(
-        child:  EntryScreen(),
+        child: EntryScreen(),
       ),
     );
 
@@ -843,16 +843,17 @@ class _CircleButtonState extends State<CircleButton> {
                     width: widget.isSelected ? 88 : 0,
                     alignment: Alignment(0, 0),
                     height: 2,
-                    color: Colors.black54,
+                    color: Theme.of(context).textTheme.headline5.color,
                   ),
+                  SizedBox(height: 12),
                 ],
               ),
             ),
             InkWell(
               onTap: widget.onPressed,
-              hoverColor: Colors.black12,
-              highlightColor: Colors.black38,
-              splashColor: Colors.black54,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              splashColor: Colors.transparent,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
@@ -863,9 +864,9 @@ class _CircleButtonState extends State<CircleButton> {
                       textAlign: TextAlign.center,
                     ),
                     style: TextStyle(
-                      color: Theme.of(context).textTheme.title.color,
+                      color: Theme.of(context).textTheme.headline5.color,
                       fontFamily: "Roboto",
-                      fontSize: Theme.of(context).textTheme.body1.fontSize,
+                      fontSize: Theme.of(context).textTheme.bodyText1.fontSize,
                       fontWeight: FontWeight.w700,
                     ),
                   ),

@@ -147,12 +147,16 @@ class _MyAppState extends State<MyApp> {
                   Listener(
                     onPointerSignal: (PointerSignalEvent details) {
                       if (isNavigating) {
+                        debugPrint("Navigating");
                         return;
                       }
+                      debugPrint("Not Navigating");
                       if (details is PointerScrollEvent) {
                         if (details.scrollDelta.dy >= 1.5) {
+                          isNavigating = true;
                           nextPage();
                         } else if (details.scrollDelta.dy <= -1.5) {
+                          isNavigating = true;
                           previousPage();
                         }
                       }
@@ -160,8 +164,10 @@ class _MyAppState extends State<MyApp> {
                     child: GestureDetector(
                       onVerticalDragUpdate: (DragUpdateDetails details) {
                         if (isNavigating) {
+                          debugPrint("Navigating");
                           return;
                         }
+                        debugPrint("Not Navigating");
                         if (details.delta.dy < -2) {
                           nextPage();
                         } else if (details.delta.dy > 2) {
@@ -248,7 +254,7 @@ class _MyAppState extends State<MyApp> {
       child: RichText(
         text: TextSpan(
           style: TextStyle(
-            color: Theme.of(context).textTheme.body1.color,
+            color: Theme.of(context).textTheme.bodyText1.color,
           ),
           children: [
             TextSpan(
@@ -366,7 +372,6 @@ class _MyAppState extends State<MyApp> {
           if (!isDesktop) {
             Navigator.of(context).pop();
           }
-          // _selectPage(4, Colors.blue[900]);
         },
       ),
       CircleButton(
@@ -399,6 +404,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void nextPage() {
+    debugPrint("Next Page");
     if (_selectedPageIndex < 6) {
       isNavigating = true;
       restoreNavigation();
@@ -407,13 +413,14 @@ class _MyAppState extends State<MyApp> {
         _scrollController.animateToPage(
           _selectedPageIndex,
           duration: Duration(milliseconds: 900),
-          curve: Curves.easeInOut,
+          curve: Curves.easeOutSine,
         );
       });
     }
   }
 
   void previousPage() {
+    debugPrint("Previous Page");
     if (_selectedPageIndex > 0) {
       isNavigating = true;
       restoreNavigation();
@@ -474,7 +481,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future restoreNavigation() async {
-    await Future.delayed(Duration(seconds: 1));
-    isNavigating = false;
+    Future.delayed(Duration(milliseconds: 1500), () {
+      isNavigating = false;
+    });
   }
 }
