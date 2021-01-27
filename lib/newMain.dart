@@ -412,8 +412,8 @@ class _MyAppState extends State<MyApp> {
         _selectedPageIndex++;
         _scrollController.animateToPage(
           _selectedPageIndex,
-          duration: Duration(milliseconds: 900),
-          curve: Curves.easeOutSine,
+          duration: Duration(milliseconds: 700),
+          curve: Curves.easeInOutQuart,
         );
       });
     }
@@ -428,8 +428,8 @@ class _MyAppState extends State<MyApp> {
         _selectedPageIndex--;
         _scrollController.animateToPage(
           _selectedPageIndex,
-          duration: Duration(milliseconds: 900),
-          curve: Curves.easeInOut,
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeInQuint,
         );
       });
     }
@@ -443,7 +443,7 @@ class _MyAppState extends State<MyApp> {
       _scrollController.animateToPage(
         _selectedPageIndex,
         duration: Duration(milliseconds: 900),
-        curve: Curves.easeInOut,
+        curve: Curves.easeInOutCubic,
       );
     });
   }
@@ -481,7 +481,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future restoreNavigation() async {
-    Future.delayed(Duration(milliseconds: 1500), () {
+    Future.delayed(Duration(milliseconds: 1000), () {
       isNavigating = false;
     });
   }

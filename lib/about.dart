@@ -14,6 +14,7 @@ class _AboutScreenState extends State<AboutScreen>
   AnimationController _scaleAnimationController;
 
   bool isDesktop = true;
+
   Size size;
 
   @override
@@ -38,11 +39,15 @@ class _AboutScreenState extends State<AboutScreen>
       duration: Duration(milliseconds: 300),
       vsync: this,
     );
+    _fadeAnimationController.value = 0;
+    Future.delayed(Duration(milliseconds: 400), () {
+      _fadeAnimationController.forward();
+    });
   }
 
   @override
   void dispose() {
-    _fadeAnimationController.dispose();
+    // _fadeAnimationController.dispose();
     _scaleAnimationController.dispose();
     super.dispose();
   }
@@ -52,9 +57,6 @@ class _AboutScreenState extends State<AboutScreen>
 //    Future.delayed(Duration(seconds: isDesktop ? 1 : 0), () {
 //      _scaleAnimationController.forward();
 //    });
-    Future.delayed(Duration(milliseconds: 900), () {
-      _fadeAnimationController.forward();
-    });
     return Container(
       child: Stack(
         children: <Widget>[
@@ -98,8 +100,7 @@ class _AboutScreenState extends State<AboutScreen>
                       text: "I am ",
                       children: [
                         TextSpan(
-                          text:
-                              "Android, PHP, Unity and Flutter developer. ",
+                          text: "Android, PHP, Unity and Flutter developer. ",
                           style: TextStyle(
                             fontFamily: "Roboto",
                             color: Theme.of(context).textTheme.title.color,

@@ -202,7 +202,7 @@ class _HomePageState extends State<HomePage> {
 
   double scrollOffset = 0;
 
-  Color _backgroundColor = Colors.red;
+  MaterialColor _backgroundColor = Colors.red;
   bool _showHeaderColor = false;
 
   double pageOffset = 0;

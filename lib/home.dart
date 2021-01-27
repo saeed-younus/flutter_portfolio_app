@@ -7,8 +7,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with TickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   AnimationController _fadeAnimationController;
 
   bool isDesktop = true;
@@ -42,7 +41,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 1000), () {
+    _fadeAnimationController.value = 0;
+    Future.delayed(Duration(milliseconds: 100), () {
       _fadeAnimationController.forward();
     });
     return Container(
