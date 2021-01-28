@@ -31,6 +31,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       duration: Duration(milliseconds: 300),
       vsync: this,
     );
+    _fadeAnimationController.value = 0;
+    Future.delayed(Duration(milliseconds: 700), () {
+      _fadeAnimationController.forward();
+    });
   }
 
   @override
@@ -41,10 +45,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    _fadeAnimationController.value = 0;
-    Future.delayed(Duration(milliseconds: 100), () {
-      _fadeAnimationController.forward();
-    });
     return Container(
       child: Stack(
         children: <Widget>[

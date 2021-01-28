@@ -40,7 +40,7 @@ class _AboutScreenState extends State<AboutScreen>
       vsync: this,
     );
     _fadeAnimationController.value = 0;
-    Future.delayed(Duration(milliseconds: 400), () {
+    Future.delayed(Duration(milliseconds: 700), () {
       _fadeAnimationController.forward();
     });
   }
